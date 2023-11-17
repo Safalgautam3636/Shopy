@@ -1,13 +1,18 @@
 import Joi from "joi";
-import { Order } from "../schemas/Product";
 
-const validateProductSchema = Joi.object<ProductDocument>({
-    name: Joi.string().required().min(4),
-    description: Joi.string().required().min(5),
-    price: Joi.number().required(),
-    stockQuantity: Joi.number().required(),
-    category: Joi.string().min(3).required(),
-    brand: Joi.string().required(),
+import { OrderDocument,orderItemDocument } from "../schemas/Order";
+
+const validateOrderItemSchema = Joi.object<orderItemDocument>({
+    productId: Joi.string().required(),
+    quantity: Joi.number().required(),
+    subtotal: Joi.number().required(),
+})
+const validateOrderSchema = Joi.object<OrderDocument>({
+    userId: Joi.string().required(),
+    orderDate: Joi.date().default(new Date(Date.now())),
+    totalAmount: Joi.number().required(),
+    items:Joi.array().items(validateOrderItemSchema).required()
+    
 })
 
-export default validateProductSchema;
+export default validateOrderSchema;
