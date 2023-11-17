@@ -1,7 +1,7 @@
 import { Order, OrderItem } from "../interfaces/Order";
 import mongoose, { Document, Schema } from "mongoose";
 
-interface OrderDocument extends Order, Document {
+export interface OrderDocument extends Order, Document {
 
 }
 const OrderItemSchema = new Schema<OrderItem>({

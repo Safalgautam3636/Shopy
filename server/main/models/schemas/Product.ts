@@ -1,7 +1,7 @@
 import Product from "../interfaces/Product";
 import mongoose, { Document, Schema } from "mongoose";
 
-interface ProductDocument extends Product, Document {
+export interface ProductDocument extends Product, Document {
 
 }
 const productSchema = new Schema<ProductDocument>({

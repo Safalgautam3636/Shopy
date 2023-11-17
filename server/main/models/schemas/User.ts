@@ -1,7 +1,7 @@
 import User from "../interfaces/User";
 import mongoose, { Document, Schema } from "mongoose";
 
-interface UserDocument extends User, Document {
+export interface UserDocument extends User, Document {
 
 }
 const userSchema = new Schema<UserDocument>({
