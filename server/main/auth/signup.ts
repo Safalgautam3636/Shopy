@@ -1,4 +1,4 @@
-import { hashPassword } from './passwordHelpers';
+import { hashPassword } from './authHelpers/passwordHelpers';
 
 import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";

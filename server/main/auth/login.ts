@@ -1,11 +1,11 @@
-import { comparePassword, hashPassword } from './passwordHelpers';
+import { comparePassword, hashPassword } from './authHelpers/passwordHelpers';
 
 import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";
 import { Request, Response, NextFunction } from "express";
 
 const login = async (req: Request, res: Response) => {
-    const { username,password} = req.body;
+    const { username, password } = req.body;
 
     const user = await UserModel.findOne({
         username
@@ -20,7 +20,7 @@ const login = async (req: Request, res: Response) => {
         }
         else {
             res.json({
-                "message":"User is valid"
+                "message": "User is valid"
             })
         }
     }
@@ -28,7 +28,7 @@ const login = async (req: Request, res: Response) => {
         return res.json({
             "message": "User doesnot exists!",
         })
-        
+
     }
 
 }
