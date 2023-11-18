@@ -1,18 +1,25 @@
 import Jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 
-const secretKey:string= process.env.JWT_SECRET as string;
+
 
 //function to generate JWT token
 
-const generateToken = (payload: object, expiresIn: string = '1h'): string => {
-    return Jwt.sign(payload, secretKey, payload);
+const generateToken = (payload: string):string => {
+    
+    const secretKey: string = process.env.JWT_SECRET as string;
+    const token = Jwt.sign({payload},secretKey,{expiresIn:'1h'});
+    return token;
 }
 
 // function to verify the token JWT
 
 const verityToken = (token: string): object | null => {
-    const decoded:object = Jwt.verify(token, secretKey) as object;
+    console.log(process.env.JWT_SECRET)
+    const secretKey: string = process.env.JWT_SECRET as string;
+    const decoded:object = Jwt.verify(token, secretKey as string) as object;
     return decoded;
 }
 

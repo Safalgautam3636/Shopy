@@ -3,6 +3,7 @@ import { hashPassword } from './authHelpers/passwordHelpers';
 import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";
 import { Request, Response, NextFunction } from "express";
+import { generateToken } from './authHelpers/jwtHelpers';
 
 const signup = async (req: Request, res: Response) => {
     const { username, email, password, address } = req.body;
@@ -30,8 +31,12 @@ const signup = async (req: Request, res: Response) => {
         console.log(error, value)
         if (!error) {
             value.password = await hashPassword(password);
-            console.log(value);
-            await new UserModel(value).save();
+            const token = generateToken(value.username);
+            const newUser = await new UserModel(value).save();
+            return res.json({
+                newUser,
+                token
+            })
         }
     }
 

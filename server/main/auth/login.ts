@@ -3,6 +3,7 @@ import { comparePassword, hashPassword } from './authHelpers/passwordHelpers';
 import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";
 import { Request, Response, NextFunction } from "express";
+import { generateToken,verityToken } from './authHelpers/jwtHelpers';
 
 const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
@@ -19,8 +20,14 @@ const login = async (req: Request, res: Response) => {
             });
         }
         else {
+            
+            //after sucessfully getting authenticated pass into the jwt
+            console.log("this is excecuting...")
+            console.log(user.username)
+            const token= generateToken(user.username);
             res.json({
-                "message": "User is valid"
+                "message": "User is valid",
+                token:token
             })
         }
     }
