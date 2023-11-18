@@ -7,7 +7,7 @@ import logout from "../auth/logout";
 const userRouter = Router();
 
 userRouter.post("/signup", signup);
-userRouter.get("/login", login);
+userRouter.post("/login", login);
 userRouter.get("/logout", logout);
 
 
