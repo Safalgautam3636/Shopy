@@ -1,27 +1,35 @@
 
+import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";
 import { Request, Response, NextFunction } from "express";
 
 const signup = async (req: Request, res: Response) => {
-    console.log(req.body)
-    const { username, email, password ,address} = req.body;
+    const { username, email, password, address } = req.body;
 
-    const userName = UserModel.findOne({
+    const userName = await UserModel.findOne({
         email
     });
-    const userEmail = UserModel.findOne({
+    const userEmail = await UserModel.findOne({
         username
     });
-
-    if (userName!==null || userEmail!==null) {
-        const newUser = new UserModel({
+    if (userName !== null || userEmail !== null) {
+        res.json({
+            "message": "User already exists",
+        })
+    }
+    else {
+        const userData = {
             username,
             email,
             password,
             address
-        });
-        await newUser.save();
-        
+        }
+
+        const { error, value } = validateUserSchema.validate(userData);
+        console.log(error, value)
+        if (!error) {
+            await new UserModel(value).save();
+        }
     }
 
 }
