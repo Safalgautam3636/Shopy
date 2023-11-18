@@ -1,3 +1,4 @@
+import { hashPassword } from './passwordHelpers';
 
 import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";
@@ -28,6 +29,8 @@ const signup = async (req: Request, res: Response) => {
         const { error, value } = validateUserSchema.validate(userData);
         console.log(error, value)
         if (!error) {
+            value.password = await hashPassword(password);
+            console.log(value);
             await new UserModel(value).save();
         }
     }
