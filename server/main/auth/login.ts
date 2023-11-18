@@ -3,9 +3,10 @@ import { comparePassword, hashPassword } from './authHelpers/passwordHelpers';
 import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";
 import { Request, Response, NextFunction } from "express";
-import { generateToken,verityToken } from './authHelpers/jwtHelpers';
+import { URequest, UResponse } from "../types";
+import { generateToken} from './authHelpers/jwtHelpers';
 
-const login = async (req: Request, res: Response) => {
+const login = async (req: URequest, res: UResponse) => {
     const { username, password } = req.body;
 
     const user = await UserModel.findOne({
@@ -13,7 +14,6 @@ const login = async (req: Request, res: Response) => {
     });
     if (user !== null) {
         const check = await comparePassword(password, user.password);
-        console.log(check);
         if (!check) {
             res.json({
                 "message": "Invalid password!"
@@ -22,9 +22,11 @@ const login = async (req: Request, res: Response) => {
         else {
             
             //after sucessfully getting authenticated pass into the jwt
-            console.log("this is excecuting...")
-            console.log(user.username)
-            const token= generateToken(user.username);
+            // console.log("this is excecuting...")
+            // console.log(user.username)
+
+            const token = generateToken({username:user.username,isAdmin:user.isAdmin});
+            res.setHeader('Auth', token);
             res.json({
                 "message": "User is valid",
                 token:token

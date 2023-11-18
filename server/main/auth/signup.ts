@@ -3,9 +3,10 @@ import { hashPassword } from './authHelpers/passwordHelpers';
 import validateUserSchema from "../models/joi/user";
 import UserModel from "../models/schemas/User";
 import { Request, Response, NextFunction } from "express";
+import { URequest, UResponse } from "../types";
 import { generateToken } from './authHelpers/jwtHelpers';
 
-const signup = async (req: Request, res: Response) => {
+const signup = async (req: URequest, res: UResponse) => {
     const { username, email, password, address } = req.body;
 
     const userName = await UserModel.findOne({
@@ -31,7 +32,7 @@ const signup = async (req: Request, res: Response) => {
         console.log(error, value)
         if (!error) {
             value.password = await hashPassword(password);
-            const token = generateToken(value.username);
+            const token = generateToken({username:value.username,isAdmin:value.isAdmin});
             const newUser = await new UserModel(value).save();
             return res.json({
                 newUser,

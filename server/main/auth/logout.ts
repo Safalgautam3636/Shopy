@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/interfaces/User";
-const logout = (req: Request, res: Response, next: NextFunction) => {
+import { URequest, UResponse } from "../types";
+const logout = (req: URequest, res: UResponse, next: NextFunction) => {
     const { username, password } = req.body.user;
 
 }
