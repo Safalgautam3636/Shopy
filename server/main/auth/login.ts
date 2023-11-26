@@ -7,38 +7,47 @@ import { URequest, UResponse } from "../types";
 import { generateToken} from './authHelpers/jwtHelpers';
 
 const login = async (req: URequest, res: UResponse) => {
-    const { username, password } = req.body;
+    try {
+        const { username, password } = req.body;
 
-    const user = await UserModel.findOne({
-        username
-    });
-    if (user !== null) {
-        const check = await comparePassword(password, user.password);
-        if (!check) {
-            res.json({
-                "message": "Invalid password!"
-            });
+        const user = await UserModel.findOne({
+            username
+        });
+        if (user !== null) {
+            const check = await comparePassword(password, user.password);
+            if (!check) {
+                res.json({
+                    "message": "Invalid password!"
+                });
+            }
+            else {
+
+                //after sucessfully getting authenticated pass into the jwt
+                // console.log("this is excecuting...")
+                // console.log(user.username)
+
+                const token = generateToken({ username: user.username, isAdmin: user.isAdmin });
+                res.setHeader('Auth', token);
+                res.json({
+                    "message": "User is valid",
+                    token: token
+                })
+            }
         }
         else {
-            
-            //after sucessfully getting authenticated pass into the jwt
-            // console.log("this is excecuting...")
-            // console.log(user.username)
-
-            const token = generateToken({username:user.username,isAdmin:user.isAdmin});
-            res.setHeader('Auth', token);
-            res.json({
-                "message": "User is valid",
-                token:token
+            return res.json({
+                "message": "User doesnot exists!",
             })
+
         }
     }
-    else {
+    catch (err) {
         return res.json({
-            "message": "User doesnot exists!",
+            message: "Internal server error",
+            err:err
         })
-
     }
+    
 
 }
 export default login;
