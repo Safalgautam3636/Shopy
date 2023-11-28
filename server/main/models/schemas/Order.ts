@@ -30,7 +30,12 @@ const OrderSchema = new Schema<OrderDocument>({
     items: {
         type: [OrderItemSchema],
         required: true
-    }
+    }, orderStatus: {
+        type: String,
+        enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
+        default: 'Pending',
+        required: true,
+    },
 })
 
 const OrderModel = mongoose.model<OrderDocument>('Order', OrderSchema);

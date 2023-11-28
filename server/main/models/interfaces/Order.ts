@@ -4,6 +4,7 @@ export interface Order{
     orderDate: Date;
     totalAmount: number,
     items: OrderItem[];
+    orderStatus: string;
 }
 export interface OrderItem{
     productId: mongoose.Schema.Types.ObjectId;
