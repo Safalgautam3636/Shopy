@@ -19,9 +19,6 @@ const deleteProdut = async (req: URequest, res: UResponse) => {
             message:"Internal server error"
         })
     }
-    
-    
-
 }
 
 export default deleteProdut;
