@@ -4,12 +4,22 @@ import signup from "../auth/signup";
 import login from "../auth/login";
 import logout from "../auth/logout";
 import authenticateUser from "../auth/authHelpers/auth";
-
+import getOwn
+import { getUser } from "../admin/user";
+import authenticateAdmin from "../auth/authHelpers/admin";
 const userRouter = Router();
 
-userRouter.post("/signup", signup);
-userRouter.post("/login",login);
-userRouter.get("/logout", logout);
 
+//authentication primary routes
+userRouter.post("user/signup", signup);
+userRouter.post("user/login",login);
+userRouter.get("user/logout", logout);
+
+// profiles related user routes
+// normal
+userRouter.get("user/me", getUser);
+
+//admin route
+userRouter.get("user/profile/:id",[authenticateAdmin], getUser);
 
 export default userRouter;

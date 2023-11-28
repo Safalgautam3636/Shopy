@@ -14,16 +14,15 @@ import validateUserSchema from '../models/joi/user';
 
 const getUser = async(req: URequest, res: UResponse): Promise<UResponse> => {
     try {
-        const userId = new ObjectId(req.params.id);
-        const user: UserDocument | null = await UserModel.findOne({ _id: userId });
-        if (user !== null) {
-            return res.json({
-                user,
-                message: "User fetched!"
-            })
+        let reqUser = req.user;
+        reqUser = new ObjectId(reqUser);
+        let user: UserDocument = await reqUser.findOne({ _id: reqUser }) as UserDocument;
+        if (user.isAdmin) {
+            user = await UserModel.findOne({ _id: new ObjectId(req.params.id) }) as UserDocument;
         }
         return res.json({
-            message:"Couldnot find the user!"
+            user,
+            message:"User profile fetched!"
         })
     }
     catch (err) {
