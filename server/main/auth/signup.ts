@@ -1,23 +1,23 @@
 import { hashPassword } from './authHelpers/passwordHelpers';
 
 import validateUserSchema from "../models/joi/user";
-import UserModel from "../models/schemas/User";
-import { Request, Response, NextFunction } from "express";
+import UserModel, { UserDocument } from "../models/schemas/User";
 import { URequest, UResponse } from "../types";
 import { generateToken } from './authHelpers/jwtHelpers';
+import User from '../models/interfaces/User';
 
-const signup = async (req: URequest, res: UResponse) => {
+const signup = async (req: URequest, res: UResponse): Promise<UResponse>=> {
     try {
-        const { username, email, password, address } = req.body;
+        const { username, email, password, address } :User= req.body as UserDocument;
 
-        const userName = await UserModel.findOne({
+        const userName:UserDocument|null = await UserModel.findOne({
             email
         });
-        const userEmail = await UserModel.findOne({
+        const userEmail:UserDocument|null = await UserModel.findOne({
             username
         });
         if (userName !== null || userEmail !== null) {
-            res.json({
+            return res.json({
                 "message": "User already exists",
             })
         }
@@ -40,6 +40,10 @@ const signup = async (req: URequest, res: UResponse) => {
                     token
                 })
             }
+            return res.json({
+                message: "Please add genuine password!",
+                error: error
+            })
         }
 
     }

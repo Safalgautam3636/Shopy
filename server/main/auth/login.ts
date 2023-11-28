@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from "express";
 import { URequest, UResponse } from "../types";
 import { generateToken} from './authHelpers/jwtHelpers';
 
-const login = async (req: URequest, res: UResponse) => {
+const login = async (req: URequest, res: UResponse): Promise<UResponse>=> {
     try {
         const { username, password } = req.body;
 
@@ -16,7 +16,7 @@ const login = async (req: URequest, res: UResponse) => {
         if (user !== null) {
             const check = await comparePassword(password, user.password);
             if (!check) {
-                res.json({
+                return res.json({
                     "message": "Invalid password!"
                 });
             }
@@ -28,7 +28,7 @@ const login = async (req: URequest, res: UResponse) => {
 
                 const token = generateToken({ username: user.username, isAdmin: user.isAdmin });
                 res.setHeader('Auth', token);
-                res.json({
+                return res.json({
                     "message": "User is valid",
                     token: token
                 })
