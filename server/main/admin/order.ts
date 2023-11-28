@@ -51,7 +51,7 @@ const cancelAllOrders = async (req: URequest, res: UResponse): Promise<UResponse
     try {
         const orders: OrderDocument[] | null = await OrderModel.find();
         if (orders) {
-            orders.forEach((order) => {
+            orders.forEach(async(order) => {
                 order.orderStatus = "Cancelled";
                 await order.save();
             })

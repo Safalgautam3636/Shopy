@@ -4,7 +4,6 @@ import signup from "../auth/signup";
 import login from "../auth/login";
 import logout from "../auth/logout";
 import authenticateUser from "../auth/authHelpers/auth";
-import getOwn
 import { getUser } from "../admin/user";
 import authenticateAdmin from "../auth/authHelpers/admin";
 const userRouter = Router();
