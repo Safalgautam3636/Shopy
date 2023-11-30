@@ -1,9 +1,7 @@
-import { Request, Response, NextFunction, Router } from "express";
-import { URequest,UResponse } from "../types";
+import { Router } from "express";
 import signup from "../auth/signup";
 import login from "../auth/login";
 import logout from "../auth/logout";
-import authenticateUser from "../auth/authHelpers/auth";
 import { getUser } from "../admin/user";
 import authenticateAdmin from "../auth/authHelpers/admin";
 const userRouter = Router();

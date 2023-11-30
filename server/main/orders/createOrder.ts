@@ -8,7 +8,7 @@ import { URequest, UResponse } from "../types";
 const createOrder = async (req: URequest, res: UResponse) => {
     try {
         let order = req.body;
-
+        console.log(req.user)
         const orderObject: Order = { ...order, userId: req.user }
         orderObject.items.forEach(async(item) => {
             const product: ProductDocument|null= await ProductModel.findOne({ _id: item.productId });
