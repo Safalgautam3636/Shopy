@@ -55,8 +55,8 @@ const deleteProduct = async (req: URequest, res: UResponse): Promise<UResponse> 
         const productId = new ObjectId(req.params.id);
         await ProductModel.deleteOne({ _id: productId });
         return res.json({
-                
-                message: "Product Deleted"
+
+            message: "Product Deleted"
         })
     }
     catch (err) {

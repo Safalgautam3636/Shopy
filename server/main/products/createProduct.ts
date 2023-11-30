@@ -15,6 +15,7 @@ import ProductModel from "../models/schemas/Product";
 import { URequest, UResponse } from "../types";
 
 const createProduct = async (req: URequest, res: UResponse) => {
+    console.log('this reached at create route')
     try {
         let source = req.body;
         const name: string = source.name;

@@ -17,9 +17,10 @@ const generateToken = (payload: object):string => {
 // function to verify the token JWT
 
 const verifyToken = (token: string): object | null => {
-    console.log(process.env.JWT_SECRET)
     const secretKey: string = process.env.JWT_SECRET as string;
-    const decoded:object = Jwt.verify(token, secretKey as string) as object;
+    
+    const decoded: object = Jwt.verify(token, secretKey) as object;
+    console.log(secretKey)
     return decoded;
 }
 

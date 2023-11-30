@@ -10,4 +10,5 @@ productRoute.delete("/delete-product/:id", deleteProdut);
 productRoute.get("/get-products", getAllProducts);
 productRoute.get("/get-product/:id", getProductById);
 productRoute.put("/update-product/:id", updateProduct);
+
 export default productRoute;

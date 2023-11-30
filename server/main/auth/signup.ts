@@ -8,6 +8,7 @@ import User from '../models/interfaces/User';
 
 const signup = async (req: URequest, res: UResponse): Promise<UResponse>=> {
     try {
+        console.log('this is debug')
         const { username, email, password, address } :User= req.body as UserDocument;
 
         const userName:UserDocument|null = await UserModel.findOne({

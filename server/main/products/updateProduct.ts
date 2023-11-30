@@ -6,36 +6,34 @@ import ProductModel, { ProductDocument } from "../models/schemas/Product";
 import { URequest, UResponse } from "../types";
 
 
-const updateProduct = async (req: URequest, res: UResponse) => {
+const updateProduct = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
         const id = new ObjectId(req.params.id)
-        
-        let product: ProductDocument = await ProductModel.findById(id) as ProductDocument;
-        console.log(product)
 
-        let bodyProduct= req.body;
-        let newProductObject: any = {
+        let product: ProductDocument = await ProductModel.findById(id) as ProductDocument;
+        let bodyProduct = req.body;
+        let newProductObject: ProductDocument = {
             ...product.toObject(),
             ...bodyProduct
         };
         delete newProductObject._id;
         delete newProductObject.__v;
-
-
         const { error, value } = validateProductSchema.validate(newProductObject);
+        console.log(value)
         if (!error) {
-            const newProduct = await ProductModel.findByIdAndUpdate({ _id: id }, { value }, { new: true });
+            await ProductModel.findByIdAndUpdate({ _id: id }, value);
+            const updatedProduct: ProductDocument | null = await ProductModel.findOne({ _id: id });
             return res.json({
-                newProduct,
+                updatedProduct,
                 status: true,
             })
         }
         else {
             return res.json({
-                error:error
+                error: error
             })
         }
-        
+
     }
     catch (err) {
         return res.json({

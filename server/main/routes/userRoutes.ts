@@ -10,9 +10,9 @@ const userRouter = Router();
 
 
 //authentication primary routes
-userRouter.post("user/signup", signup);
-userRouter.post("user/login",login);
-userRouter.get("user/logout", logout);
+userRouter.post("/user/signup/", signup);
+userRouter.post("/user/login/",login);
+userRouter.get("/user/logout/", logout);
 
 // profiles related user routes
 // normal
