@@ -5,14 +5,14 @@ import { getOrders, getSpecificOrderByUser } from "../orders/getOrder";
 import updateOrderStatus from "../orders/updateOrder";
 import { Router } from "express";
 
-const orderRouter = Router();
+const orderRoutes = Router();
 
-orderRouter.get("/get-order/:id", getSpecificOrderByUser);
-orderRouter.get("/get-orders/", getOrders);
-orderRouter.put("/cancel-order/", cancelOrder);
-orderRouter.get("/total-cost", computeTotalCost);
-orderRouter.get("/create-order", createOrder);
-orderRouter.put("/update-order", updateOrderStatus);
+orderRoutes.get("/create-order", createOrder);
+orderRoutes.get("/get-order/:id", getSpecificOrderByUser);
+orderRoutes.get("/get-orders/", getOrders);
+orderRoutes.put("/cancel-order/", cancelOrder);
+orderRoutes.get("/total-cost", computeTotalCost);
+orderRoutes.put("/update-order", updateOrderStatus);
 
 
-export default orderRouter;
+export default orderRoutes;

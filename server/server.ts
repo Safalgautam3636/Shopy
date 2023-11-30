@@ -7,6 +7,7 @@ import userRouter from "./main/routes/userRoutes";
 import authenticateAdmin from "./main/auth/authHelpers/admin";
 import productRoute from "./main/routes/productRoutes";
 import bodyParser from "body-parser"
+import orderRouter from "./main/routes/orderRoutes";
 
 dotenv.config()
 
@@ -22,6 +23,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/",userRouter);
 
 app.use('/api/', productRoute);
+
+app.use("/api/", orderRouter);
+
 
 
 app.listen(process.env.PORT, () => {
