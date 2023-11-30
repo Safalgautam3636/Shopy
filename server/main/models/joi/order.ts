@@ -6,6 +6,7 @@ const validateOrderItemSchema = Joi.object<orderItemDocument>({
     productId: Joi.string().required(),
     quantity: Joi.number().required(),
     subtotal: Joi.number().required(),
+    unitPrice: Joi.number().required()
 })
 const validateOrderSchema = Joi.object<OrderDocument>({
     userId: Joi.string().required(),

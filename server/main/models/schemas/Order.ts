@@ -18,9 +18,11 @@ const OrderItemSchema = new Schema<orderItemDocument>({
         type: Number,
         required: true
     },
+    unitPrice: {
+        type:Number
+    },
     subtotal: {
-        type: Number,
-        required: true
+        type: Number
     }
 })
 const OrderSchema = new Schema<OrderDocument>({

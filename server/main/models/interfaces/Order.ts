@@ -9,5 +9,6 @@ export interface Order{
 export interface OrderItem{
     productId: mongoose.Schema.Types.ObjectId;
     quantity: number;
+    unitPrice: number;
     subtotal: number;
 }
