@@ -1,13 +1,16 @@
+import { ObjectId } from 'mongodb';
 import { Order } from "../models/interfaces/Order";
 import OrderModel, { OrderDocument } from "../models/schemas/Order";
 import ProductModel from "../models/schemas/Product";
 import { URequest, UResponse } from "../types";
+import UserModel from "../models/schemas/User";
+import { UserDocument } from "../models/schemas/User";
 
-const cancelOrder = async (req: URequest, res: UResponse) => {
+const cancelOrder = async (req: URequest, res: UResponse):Promise<UResponse>=> {
     try {
-        const userId = req.user;
-        const orderId = req.params.orderId;
-        const userOrder: OrderDocument | null = await OrderModel.findOne({ userId, _id: orderId });
+        const user: UserDocument | null = await UserModel.findOne({ username: req.user });
+        const orderId = new ObjectId(req.params.id);
+        const userOrder: OrderDocument | null = await OrderModel.findOne({ userId:user?._id, _id: orderId });
 
         if (userOrder) {
             if (userOrder.orderStatus === 'Pending' || userOrder.orderStatus === 'Processing') {
