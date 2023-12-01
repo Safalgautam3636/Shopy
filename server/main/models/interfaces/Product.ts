@@ -1,9 +1,13 @@
 interface Product{
-    name: string;
-    description: string;
+    imgUrl:string,
+    name: string; //title
+    description?: string;
     price: number;
     stockQuantity: number;
     category: string;
-    brand: string;
+    brand?: string;
+    ratings: number;
+    reviews: number;
 }
+
 export default Product;
