@@ -15,8 +15,7 @@ import validateUserSchema from '../models/joi/user';
 const getUser = async(req: URequest, res: UResponse): Promise<UResponse> => {
     try {
         let reqUser = req.user;
-        reqUser = new ObjectId(reqUser);
-        let user: UserDocument = await reqUser.findOne({ _id: reqUser }) as UserDocument;
+        let user: UserDocument = await reqUser.findOne({ usenrmae: reqUser }) as UserDocument;
         if (user.isAdmin) {
             user = await UserModel.findOne({ _id: new ObjectId(req.params.id) }) as UserDocument;
         }

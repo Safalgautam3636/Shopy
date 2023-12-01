@@ -20,4 +20,7 @@ userRouter.get("/user/logout/", logout);
 //admin route
 // userRouter.get("user/profile/:id",[authenticateAdmin], getUser);
 
+userRouter.get('/admin/users', getUsers);
+userRouter.get("/admin/user",getUser)
+
 export default userRouter;
