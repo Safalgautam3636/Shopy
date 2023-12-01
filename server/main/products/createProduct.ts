@@ -24,6 +24,9 @@ const createProduct = async (req: URequest, res: UResponse) => {
         const stockQuantity: number = source.stockQuantity;
         const category: string = source.category;
         const brand: string = source.brand;
+        const reviews: number = source.reviews;
+        const ratings: number = source.ratings;
+        const imgUrl: string = source.imgUrl;
 
         const productObject: Product = {
             name,
@@ -31,7 +34,10 @@ const createProduct = async (req: URequest, res: UResponse) => {
             price,
             stockQuantity,
             category,
-            brand
+            brand,
+            reviews,
+            ratings,
+            imgUrl
         };
         const { error, value } = validateProductSchema.validate(productObject);
         if (!error) {
