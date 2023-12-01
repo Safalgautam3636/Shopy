@@ -13,12 +13,6 @@ userRouter.post("/user/signup/", signup);
 userRouter.post("/user/login/",login);
 userRouter.get("/user/logout/", logout);
 
-// profiles related user routes
-// normal
-// userRouter.get("user/me", getUser);
-
-//admin route
-// userRouter.get("user/profile/:id",[authenticateAdmin], getUser);
 
 userRouter.get('/admin/users', getUsers);
 userRouter.get("/admin/user",getUser)

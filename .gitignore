@@ -2,3 +2,5 @@ node_modules
 .env
 dist
 workflow.ts
+products_data.json
+output_first_500.csv
