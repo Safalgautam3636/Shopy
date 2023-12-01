@@ -2,8 +2,9 @@ import { Router } from "express";
 import signup from "../auth/signup";
 import login from "../auth/login";
 import logout from "../auth/logout";
-import { getUser } from "../admin/user";
 import authenticateAdmin from "../auth/authHelpers/admin";
+import { getUser,getUsers,deleteUser,deleteUsers,updateUser} from "../admin/user"
+
 const userRouter = Router();
 
 
@@ -14,9 +15,9 @@ userRouter.get("/user/logout/", logout);
 
 // profiles related user routes
 // normal
-userRouter.get("user/me", getUser);
+// userRouter.get("user/me", getUser);
 
 //admin route
-userRouter.get("user/profile/:id",[authenticateAdmin], getUser);
+// userRouter.get("user/profile/:id",[authenticateAdmin], getUser);
 
 export default userRouter;

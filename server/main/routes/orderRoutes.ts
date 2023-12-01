@@ -4,7 +4,7 @@ import createOrder from "../orders/createOrder";
 import { getOrders, getSpecificOrderByUser } from "../orders/getOrder";
 import updateOrderStatus from "../orders/updateOrder";
 import { Router } from "express";
-import {cancelAllOrders,cancelSpecificOrder,getAllOrders,} from "../admin/order";
+import {cancelAllOrders,cancelSpecificOrder,getAllOrders} from "../admin/order";
 
 const orderRoutes:Router = Router();
 
@@ -15,6 +15,7 @@ orderRoutes.put("/cancel-order/:id/", cancelOrder);
 orderRoutes.put("/update-order/:id/", updateOrderStatus);
 orderRoutes.get("/total-cost", computeTotalCost);
 
+//all admin
 orderRoutes.put("/admin/cancel-orders/", cancelAllOrders);
 orderRoutes.put("/admin/cancel-order/:id/", cancelSpecificOrder);
 orderRoutes.get("/admin/orders/", getAllOrders);

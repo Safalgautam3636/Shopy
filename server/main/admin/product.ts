@@ -10,9 +10,10 @@ import ProductModel, { ProductDocument } from '../models/schemas/Product';
 
 const getProduct = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
+        console.log("test")
         const productId = new ObjectId(req.params.id);
         const product: ProductDocument | null = await ProductModel.findOne({ _id: productId });
-        if (!product) {
+        if (product) {
             return res.json({
                 product,
                 message: "Product Fetched"
@@ -32,10 +33,10 @@ const getProduct = async (req: URequest, res: UResponse): Promise<UResponse> => 
 const getProducts = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
 
-        const product: ProductDocument[] | null = await ProductModel.find();
-        if (!product) {
+        const products: ProductDocument[] | null = await ProductModel.find();
+        if (products) {
             return res.json({
-                product,
+                products,
                 message: "Products Fetched"
             })
         }
