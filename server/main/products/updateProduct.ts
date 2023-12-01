@@ -19,7 +19,6 @@ const updateProduct = async (req: URequest, res: UResponse): Promise<UResponse> 
         delete newProductObject._id;
         delete newProductObject.__v;
         const { error, value } = validateProductSchema.validate(newProductObject);
-        console.log(value)
         if (!error) {
             await ProductModel.findByIdAndUpdate({ _id: id }, value);
             const updatedProduct: ProductDocument | null = await ProductModel.findOne({ _id: id });

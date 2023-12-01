@@ -10,7 +10,7 @@ const cancelOrder = async (req: URequest, res: UResponse):Promise<UResponse>=> {
     try {
         const user: UserDocument | null = await UserModel.findOne({ username: req.user });
         const orderId = new ObjectId(req.params.id);
-        const userOrder: OrderDocument | null = await OrderModel.findOne({ userId:user?._id, _id: orderId });
+        const userOrder: OrderDocument | null = await OrderModel.findOne({ userId: user?._id, _id: orderId });
 
         if (userOrder) {
             if (userOrder.orderStatus === 'Pending' || userOrder.orderStatus === 'Processing') {

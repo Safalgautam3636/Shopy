@@ -8,7 +8,6 @@ import User from '../models/interfaces/User';
 
 const signup = async (req: URequest, res: UResponse): Promise<UResponse>=> {
     try {
-        console.log('this is debug')
         const { username, email, password, address } :User= req.body as UserDocument;
 
         const userName:UserDocument|null = await UserModel.findOne({
@@ -31,7 +30,6 @@ const signup = async (req: URequest, res: UResponse): Promise<UResponse>=> {
             }
 
             const { error, value } = validateUserSchema.validate(userData);
-            console.log(error, value)
             if (!error) {
                 value.password = await hashPassword(password);
                 const token = generateToken({ username: value.username, isAdmin: value.isAdmin });

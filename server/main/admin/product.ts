@@ -10,7 +10,7 @@ import ProductModel, { ProductDocument } from '../models/schemas/Product';
 
 const getProduct = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
-        console.log("test")
+        
         const productId = new ObjectId(req.params.id);
         const product: ProductDocument | null = await ProductModel.findOne({ _id: productId });
         if (product) {

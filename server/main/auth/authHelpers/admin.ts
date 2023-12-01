@@ -18,7 +18,6 @@ interface Decoded  {
 
 const authenticateAdmin = async (req: URequest, res: UResponse, next: NextFunction): Promise<UResponse|undefined> => {
     const token = req.header('Auth');
-    console.log(token)
     if (!token) {
         return res.json({
             message: 'No token provided',

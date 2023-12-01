@@ -26,7 +26,6 @@ const getOrders = async(req: URequest, res: UResponse):Promise<UResponse>=> {
 const getSpecificOrderByUser = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
         const orderId = req.params.id;
-        console.log(orderId)
         const user: UserDocument | null = await UserModel.findOne({ username: req.user });
         const order: OrderDocument|null = await OrderModel.findOne({
             userId: user?._id,

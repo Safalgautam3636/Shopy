@@ -25,7 +25,7 @@ app.use("/api/",userRouter);
 
 app.use('/api/', productRoute);
 
-app.use("/api/", authenticateUser,orderRouter);
+app.use("/api/",authenticateUser,orderRouter);
 
 
 

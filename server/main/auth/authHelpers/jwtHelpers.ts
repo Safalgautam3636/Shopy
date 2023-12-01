@@ -20,7 +20,6 @@ const verifyToken = (token: string): object | null => {
     const secretKey: string = process.env.JWT_SECRET as string;
     
     const decoded: object = Jwt.verify(token, secretKey) as object;
-    console.log(secretKey)
     return decoded;
 }
 

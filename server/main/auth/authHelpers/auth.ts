@@ -11,7 +11,6 @@ type Decoded = {
 }
 const authenticateUser = (req: URequest, res: UResponse, next: NextFunction) => {
     const token = req.header('Auth');
-    console.log(token);
     if (!token) {
         return res.json({
             message: 'No token provided',
@@ -21,7 +20,6 @@ const authenticateUser = (req: URequest, res: UResponse, next: NextFunction) => 
         const decoded:Decoded= verifyToken(token) as Decoded;
         const  user :UserResponse= decoded.user;
         req.user = user.username;
-        console.log('User',req.user)
         next();
     }
 }

@@ -21,11 +21,6 @@ const login = async (req: URequest, res: UResponse): Promise<UResponse>=> {
                 });
             }
             else {
-
-                //after sucessfully getting authenticated pass into the jwt
-                // console.log("this is excecuting...")
-                // console.log(user.username)
-
                 const token = generateToken({ username: user.username, isAdmin: user.isAdmin });
                 res.setHeader('Auth', token);
                 return res.json({
