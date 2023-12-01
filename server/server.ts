@@ -8,6 +8,7 @@ import authenticateAdmin from "./main/auth/authHelpers/admin";
 import productRoute from "./main/routes/productRoutes";
 import bodyParser from "body-parser"
 import orderRouter from "./main/routes/orderRoutes";
+import authenticateUser from "./main/auth/authHelpers/auth";
 
 dotenv.config()
 
@@ -24,7 +25,7 @@ app.use("/api/",userRouter);
 
 app.use('/api/', productRoute);
 
-app.use("/api/", orderRouter);
+app.use("/api/", authenticateUser,orderRouter);
 
 
 

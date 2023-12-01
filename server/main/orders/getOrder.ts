@@ -2,18 +2,19 @@
 import { Order } from "../models/interfaces/Order";
 import validateOrderSchema from "../models/joi/order";
 import OrderModel, { OrderDocument } from "../models/schemas/Order";
+import UserModel, { UserDocument } from "../models/schemas/User";
 import { URequest, UResponse } from "../types";
 
 
 //get all orders of the user
-const getOrders = async(req: URequest, res: UResponse) => {
+const getOrders = async(req: URequest, res: UResponse):Promise<UResponse>=> {
     try {
-        const userId = req.user;
-        const userOrders: OrderDocument[] = await OrderModel.find({ userId: userId });
-        return {
+        const user: UserDocument|null = await UserModel.findOne({ username: req.user });
+        const userOrders: OrderDocument[] = await OrderModel.find({ userId: user?._id });
+        return res.json({
             userOrders,
-            message:"User orders sucessfully retrived!"
-        }
+            message:`All these are the orders for ${user?.username}!`
+        })
     }
     catch (err) {
         return res.json({
@@ -22,12 +23,13 @@ const getOrders = async(req: URequest, res: UResponse) => {
         })
     }
 }
-const getSpecificOrderByUser = async (req: URequest, res: UResponse) => {
+const getSpecificOrderByUser = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
-        const userId = req.user;
-        const orderId = req.params.orderId;
+        const orderId = req.params.id;
+        console.log(orderId)
+        const user: UserDocument | null = await UserModel.findOne({ username: req.user });
         const order: OrderDocument|null = await OrderModel.findOne({
-            userId: userId,
+            userId: user?._id,
             _id: orderId
         });
         if (order) {
