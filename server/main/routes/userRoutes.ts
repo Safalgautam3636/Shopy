@@ -13,7 +13,7 @@ userRouter.post("/user/signup/", signup);
 userRouter.post("/user/login/",login);
 userRouter.get("/user/logout/", logout);
 
-
+//admin
 userRouter.get('/admin/users', getUsers);
 userRouter.get("/admin/user",getUser)
 
