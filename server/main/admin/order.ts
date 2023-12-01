@@ -6,6 +6,7 @@ import { Order } from './../models/interfaces/Order';
 
 import { URequest, UResponse } from "../types";
 import OrderModel, { OrderDocument } from '../models/schemas/Order';
+import ProductModel from '../models/schemas/Product';
 
 //cancel orders
 const getAllOrders = async(req: URequest, res: UResponse): Promise<UResponse> => {
@@ -28,17 +29,32 @@ const cancelSpecificOrder = async (req: URequest, res: UResponse): Promise<UResp
         const order: OrderDocument | null = await OrderModel.findOne({ _id:orderId });
         if (order) {
             if (order.orderStatus === 'Pending' || order.orderStatus === 'Processing') {
+                // Increment stockQuantity for each product in the canceled order
+                for (const item of order.items) {
+                    const product = await ProductModel.findOne({ _id: item.productId });
+                    if (product) {
+                        product.stockQuantity += item.quantity;
+                        await product.save();
+                    }
+                }
+
                 order.orderStatus = 'Cancelled';
                 await order.save();
-                return res.json({
+
+                return res.status(200).json({
                     order,
-                    message: "Order cancelled sucessfully"
-                })
+                    message: "Order cancelled successfully. Products added back to inventory.",
+                });
+            } else {
+                return res.status(400).json({
+                    message: "Unable to cancel the order. Invalid order status for cancellation.",
+                });
             }
+        } else {
+            return res.status(404).json({
+                message: "Order not found.",
+            });
         }
-        return res.json({
-            message: "Unable to cancel the order!"
-        })
     }
     catch (err) {
         return res.json({
@@ -51,10 +67,18 @@ const cancelAllOrders = async (req: URequest, res: UResponse): Promise<UResponse
     try {
         const orders: OrderDocument[] | null = await OrderModel.find();
         if (orders) {
-            orders.forEach(async(order) => {
+            const resolveOrders = orders.map(async (order) => {
+                for (const item of order.items) {
+                    const product = await ProductModel.findOne({ _id: item.productId });
+                    if (product) {
+                        product.stockQuantity += item.quantity;
+                        await product.save();
+                    }
+                }
                 order.orderStatus = "Cancelled";
                 await order.save();
             })
+            Promise.all(resolveOrders);
         }
         return res.json({
             message: "Cancelled all the orders!"
