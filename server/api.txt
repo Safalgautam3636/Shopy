@@ -1,0 +1,35 @@
+// User Routes
+- POST http://localhost:4500/api/user/signup   
+- POST http://localhost:4500/api/user/login
+- GET http://localhost:4500/api/user/logout
+- GET http://localhost:4500/api/user/me
+- PUT http://localhost:4500/api/user/update
+
+// Admin User Routes
+- GET http://localhost:4500/api/admin/users
+- GET http://localhost:4500/api/admin/user/:id
+- DELETE http://localhost:4500/api/admin/user/delete-all
+- DELETE http://localhost:4500/api/admin/user/delete/:id
+- PUT http://localhost:4500/api/admin/user/update/:id
+
+// Product Routes
+- GET http://localhost:4500/api/product/products
+- GET http://localhost:4500/api/product/product/:id
+- POST http://localhost:4500/api/admin/product/create-product
+- PUT http://localhost:4500/api/admin/product/update-product/:id
+- DELETE http://localhost:4500/api/admin/product/delete-product/:id
+- DELETE http://localhost:4500/api/admin/product/delete-products
+
+// Order Routes
+- POST http://localhost:4500/api/order/create-order
+- GET http://localhost:4500/api/order/get-order/:id
+- GET http://localhost:4500/api/order/get-orders
+- PUT http://localhost:4500/api/order/cancel-order/:id
+- PUT http://localhost:4500/api/order/update-order/:id
+
+// Admin Order Routes
+- GET http://localhost:4500/api/admin/order/orders
+- PUT http://localhost:4500/api/admin/order/cancel-orders
+- PUT http://localhost:4500/api/admin/order/cancel-order/:id
+- PUT http://localhost:4500/api/admin/order/update-order/:id
+- GET http://localhost:4500/api/admin/order/orders
