@@ -20,6 +20,8 @@ import {
 
 const orderRoutes: Router = Router();
 
+// Normal user route
+
 /**
  * Create a new order.
  * @route POST /order/create-order/
@@ -73,9 +75,14 @@ orderRoutes.put(
   updateOrderStatus
 );
 
-/**
- * Admin operations.
- */
+
+
+
+// Admin route
+
+
+
+
 
 /**
  * Get a list of all orders (admin access).

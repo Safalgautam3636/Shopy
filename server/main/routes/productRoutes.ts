@@ -14,6 +14,11 @@ import authenticateAdmin from "../auth/authHelpers/admin";
 
 const productRoute = express.Router();
 
+
+
+// Normal user routes
+
+
 /**
  * @route GET /product/products
  * @description Get a list of all products.
@@ -28,6 +33,13 @@ productRoute.get("/product/products", getAllProducts);
  * @returns {Product} - Details of the product.
  */
 productRoute.get("/product/product/:id", getProductById);
+
+
+
+
+// Admin routes
+
+
 
 /**
  * @route POST /admin/product/create-product/

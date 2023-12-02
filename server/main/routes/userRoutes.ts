@@ -16,6 +16,9 @@ import authenticateUser from "../auth/authHelpers/auth";
 
 const userRouter = Router();
 
+
+// Normal user routes
+
 /**
  * @route POST /user/signup
  * @description Create a new user account.
@@ -56,9 +59,15 @@ userRouter.get("/user/me/", authenticateUser, getOwnUserProfile);
  */
 userRouter.put("/user/update/", authenticateUser, updateOwnUserProfile);
 
-/**
- * Admin routes.
- */
+
+
+
+
+
+// Admin routes
+
+
+
 
 /**
  * @route GET /admin/users
