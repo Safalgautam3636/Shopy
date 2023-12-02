@@ -32,8 +32,8 @@ const signup = async (req: URequest, res: UResponse): Promise<UResponse>=> {
             const { error, value } = validateUserSchema.validate(userData);
             if (!error) {
                 value.password = await hashPassword(password);
-                const token = generateToken({ username: value.username, isAdmin: value.isAdmin });
                 const newUser = await new UserModel(value).save();
+                const token = generateToken({ username: value._id, isAdmin: value.isAdmin });
                 return res.json({
                     newUser,
                     token
