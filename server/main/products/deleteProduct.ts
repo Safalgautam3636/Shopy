@@ -19,5 +19,4 @@ const deleteProdut = async (req: URequest, res: UResponse) :Promise<UResponse>=>
         })
     }
 }
-
 export default deleteProdut;

@@ -39,7 +39,6 @@ const getProductById = async (req: URequest, res: UResponse):Promise<UResponse> 
         })
     }
 }
-
 export {
     getAllProducts,
     getProductById

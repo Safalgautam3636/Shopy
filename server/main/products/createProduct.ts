@@ -1,14 +1,3 @@
-//Create product
-//user will pass the product information and you have to store into the db
-// const productSchema = new Schema<ProductDocument>({
-//     name: { type: String, required: true },
-//     description: { type: String, required: true },
-//     price: { type: Number, required: true },
-//     stockQuantity: { type: Number, required: true },
-//     category: { type: String, required: true },
-//     brand: { type: String, required: true },
-// })
-
 import Product from "../models/interfaces/Product";
 import validateProductSchema from "../models/joi/product";
 import ProductModel from "../models/schemas/Product";
@@ -26,7 +15,6 @@ const createProduct = async (req: URequest, res: UResponse) => {
         const reviews: number = source.reviews;
         const ratings: number = source.ratings;
         const imgUrl: string = source.imgUrl;
-
         const productObject: Product = {
             name,
             description,
@@ -47,7 +35,6 @@ const createProduct = async (req: URequest, res: UResponse) => {
                 message: "Sucess",
                 valid: true
             })
-
         }
         else {
             return res.json({
@@ -62,8 +49,5 @@ const createProduct = async (req: URequest, res: UResponse) => {
             message:"Internal Server error"
         })
     }
-    
-
 }
-
 export default createProduct;
