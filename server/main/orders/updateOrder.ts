@@ -15,12 +15,12 @@ type StatusMap = {
 const updateOrderStatus = async (req: URequest, res: UResponse) => {
     try {
         const status_map:StatusMap = { "pending": 'Pending', "processing": 'Processing', "shipped": 'Shipped', "delivered": 'Delivered', "cancelled": 'Cancelled' };
-        const newStatus:string= req.body.status as string;
+        const newStatus = req.body.orderStatus;
+        console.log(newStatus)
         const updateStatus: string = status_map[newStatus] as string;
-
-        const user: UserDocument | null = await UserModel.findOne({ username: req.user });
+        console.log(updateStatus)
         const orderId = new ObjectId(req.params.id);
-        const userOrders: OrderDocument | null = await OrderModel.findOne({ userId: user?._id, _id: orderId });
+        const userOrders: OrderDocument | null = await OrderModel.findOne({ userId: req.user, _id: orderId });
         if (userOrders) {
             userOrders.orderStatus = updateStatus;
             await userOrders.save();

@@ -1,25 +1,25 @@
 import cancelOrder from "../orders/cancelOrder";
-import computeTotalCost from "../orders/computeTotalCost";
 import createOrder from "../orders/createOrder";
 import { getOrders, getSpecificOrderByUser } from "../orders/getOrder";
 import updateOrderStatus from "../orders/updateOrder";
 import { Router } from "express";
-import {cancelAllOrders,cancelSpecificOrder,getAllOrders} from "../admin/order";
+import {cancelAllOrders,cancelSpecificOrder,getAllOrders, updateOrderAdmin} from "../admin/order";
+import authenticateUser from "../auth/authHelpers/auth";
+import authenticateAdmin from "../auth/authHelpers/admin";
 
 const orderRoutes:Router = Router();
 
-orderRoutes.post("/create-order/", createOrder);
-orderRoutes.get("/get-order/:id/", getSpecificOrderByUser);
-orderRoutes.get("/get-orders/", getOrders);
-orderRoutes.put("/cancel-order/:id/", cancelOrder);
-orderRoutes.put("/update-order/:id/", updateOrderStatus);
-orderRoutes.get("/total-cost", computeTotalCost);
+orderRoutes.post("/order/create-order/",authenticateUser ,createOrder);
+orderRoutes.get("/order/get-order/:id/", authenticateUser,getSpecificOrderByUser);
+orderRoutes.get("/order/get-orders/", authenticateUser, getOrders);
+orderRoutes.put("/order/cancel-order/:id/", authenticateUser, cancelOrder);
+orderRoutes.put("/order/update-order/:id/", authenticateUser,updateOrderStatus);
 
 //all admin
-orderRoutes.put("/admin/cancel-orders/", cancelAllOrders);
-orderRoutes.put("/admin/cancel-order/:id/", cancelSpecificOrder);
-orderRoutes.get("/admin/orders/", getAllOrders);
-
-
+orderRoutes.get("/admin/order/orders",[authenticateUser,authenticateAdmin] ,getAllOrders);
+orderRoutes.put("/admin/order/cancel-orders/",[authenticateUser,authenticateAdmin] ,cancelAllOrders);
+orderRoutes.put("/admin/order/cancel-order/:id/",[authenticateUser,authenticateAdmin] , cancelSpecificOrder);
+orderRoutes.put("/admin/order/update-order/:id/",[authenticateUser,authenticateAdmin] , updateOrderAdmin);
+orderRoutes.get("/admin/order/orders/",[authenticateUser,authenticateAdmin] ,getAllOrders);
 
 export default orderRoutes;
