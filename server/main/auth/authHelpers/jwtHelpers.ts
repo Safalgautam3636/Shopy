@@ -3,23 +3,28 @@ import dotenv from "dotenv";
 dotenv.config();
 
 
-
+type UserResponse = { _id: string, isAdmin: boolean };
+type Decoded = {
+    user: UserResponse,
+    iat: number,
+    exp: number
+}
 
 //function to generate JWT token
 
-const generateToken = (payload: object):string => {
+const generateToken = (payload: UserResponse):string => {
     
     const secretKey: string = process.env.JWT_SECRET as string;
-    const token = Jwt.sign({ user: payload }, secretKey, { expiresIn: '8760h' });
+    const token = Jwt.sign({ user:payload }, secretKey, { expiresIn: '18760h' });
     return token;
 }
 
 // function to verify the token JWT
 
-const verifyToken = (token: string): object | null => {
+const verifyToken = (token: string): Decoded | null => {
     const secretKey: string = process.env.JWT_SECRET as string;
     
-    const decoded: object = Jwt.verify(token, secretKey) as object;
+    const decoded: Decoded = Jwt.verify(token, secretKey) as Decoded;
     return decoded;
 }
 

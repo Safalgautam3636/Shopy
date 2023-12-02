@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { verifyToken } from './jwtHelpers';
 import { URequest, UResponse } from "../../types";
 
-type UserResponse = { username: string, isAdmin: boolean };
+type UserResponse = { _id: string, isAdmin: boolean };
 type Decoded = {
     user: UserResponse,
     iat: number,
@@ -17,9 +17,9 @@ const authenticateUser = (req: URequest, res: UResponse, next: NextFunction) => 
         })
     }
     else {
-        const decoded:Decoded= verifyToken(token) as Decoded;
-        const  user :UserResponse= decoded.user;
-        req.user = user.username;
+        const decoded: Decoded = verifyToken(token) as Decoded;
+        const user: UserResponse= decoded.user;
+        req.user = user._id;
         next();
     }
 }

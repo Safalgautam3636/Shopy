@@ -6,21 +6,16 @@ import { URequest, UResponse } from "../types";
 const updateOwnUserProfile = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
         const userId: string = req.user;
-        console.log(userId)
         const user: UserDocument|null= await UserModel.findOne({
             _id:userId
         });
-        console.log(user);
         const newUser = {
             ...user?.toObject(),
             ...req.body
         };
         delete newUser._id;
         delete newUser.__v;
-        console.log(newUser)
-        console.log(req.body.password)
         if (req.body?.password!==undefined) {
-            console.log('this')
             newUser.password = await hashPassword(req.body.password);
         }
         if (req.body?.isAdmin !== undefined) {

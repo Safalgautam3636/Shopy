@@ -11,10 +11,10 @@ const signup = async (req: URequest, res: UResponse): Promise<UResponse>=> {
         const { username, email, password, address } :User= req.body as UserDocument;
 
         const userName:UserDocument|null = await UserModel.findOne({
-            email
+            username
         });
         const userEmail:UserDocument|null = await UserModel.findOne({
-            username
+            email
         });
         if (userName !== null || userEmail !== null) {
             return res.json({
@@ -32,8 +32,9 @@ const signup = async (req: URequest, res: UResponse): Promise<UResponse>=> {
             const { error, value } = validateUserSchema.validate(userData);
             if (!error) {
                 value.password = await hashPassword(password);
-                const newUser = await new UserModel(value).save();
-                const token = generateToken({ username: value._id, isAdmin: value.isAdmin });
+                const newUser = new UserModel(value);
+                await newUser.save();
+                const token = generateToken({ _id: newUser._id, isAdmin: value.isAdmin });
                 return res.json({
                     newUser,
                     token

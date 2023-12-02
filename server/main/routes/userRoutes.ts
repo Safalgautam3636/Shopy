@@ -17,14 +17,14 @@ userRouter.post("/user/signup/", signup);
 userRouter.post("/user/login/",login);
 userRouter.get("/user/logout/", logout);
 userRouter.get("/user/me/",authenticateUser, getOwnUserProfile);
-userRouter.put("/user/update/",authenticateUser,updateOwnUserProfile)
+userRouter.put("/user/update/", authenticateUser, updateOwnUserProfile);
 
 //admin
-userRouter.get('/admin/users', getUsers);
-userRouter.get("/admin/user", getUser);
-userRouter.delete("/admin/user/delete-all/", deleteUsers);
-userRouter.delete("/admin/user/delete/:id", deleteUser);
-userRouter.delete("/admin/user/update/", updateUser);
+userRouter.get('/admin/users',[authenticateUser,authenticateAdmin], getUsers);
+userRouter.get("/admin/user/:id", [authenticateUser, authenticateAdmin], getUser);
+userRouter.delete("/admin/user/delete-all/", [authenticateUser, authenticateAdmin], deleteUsers);
+userRouter.delete("/admin/user/delete/:id", [authenticateUser, authenticateAdmin], deleteUser);
+userRouter.put("/admin/user/update/:id", [authenticateUser, authenticateAdmin], updateUser);
 
 
 export default userRouter;
