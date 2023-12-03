@@ -4,7 +4,7 @@ import { Product } from "@/types/Product"; // Importing the Product interface
 const BASE_URL = process.env.BACKEND_URL || "http://localhost:4500/api";
 
 interface ProductResponse {
-  data: Product;
+  product: Product;
 }
 
 interface ProductsResponse {
