@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getAllProducts } from "@/app/api/product/route";
 import { Product } from "@/types/Product";
 import ProductItem from "./ProductItem";
@@ -24,6 +24,8 @@ function ItemGrid() {
     fetchProducts();
   }, []);
 
+  const cachedProductList = useMemo(() => products, [products]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -32,14 +34,14 @@ function ItemGrid() {
     return <div>Error: {error.message}</div>;
   }
 
-  if (!products || products.length === 0) {
+  if (!cachedProductList || cachedProductList.length === 0) {
     return <div>Error: products not found</div>;
   }
 
   return (
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
+        {cachedProductList.map((product) => (
           <ProductItem key={product._id} product={product} />
         ))}
       </div>
