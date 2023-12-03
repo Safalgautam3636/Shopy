@@ -8,7 +8,7 @@ interface ProductItemProps {
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   return (
-    <Link href={`/product/${product._id}`} passHref>
+    <Link href={`/${product._id}`} passHref>
       <div className="max-w-sm overflow-hidden rounded shadow-lg">
         <div className="relative h-48 w-full">
           <Image
