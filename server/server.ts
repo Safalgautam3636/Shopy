@@ -1,14 +1,10 @@
-
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import invokeDB from "./main/db/setupDb";
-
 import userRouter from "./main/routes/userRoutes";
-import authenticateAdmin from "./main/auth/authHelpers/admin";
 import productRoute from "./main/routes/productRoutes";
 import bodyParser from "body-parser"
 import orderRouter from "./main/routes/orderRoutes";
-import authenticateUser from "./main/auth/authHelpers/auth";
 
 dotenv.config()
 
@@ -19,13 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use('/trial',authenticateUser)
-
 app.use("/api/",userRouter);
-
 app.use('/api/', productRoute);
-
-app.use("/api/",authenticateUser,orderRouter);
+app.use("/api/",orderRouter);
 
 
 

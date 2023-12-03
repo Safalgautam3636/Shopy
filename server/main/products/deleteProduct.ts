@@ -5,7 +5,8 @@ import { ObjectId } from 'mongodb';
 const deleteProdut = async (req: URequest, res: UResponse) :Promise<UResponse>=> {
     try {
         const id = new ObjectId(req.params.id);
-        const deletedProduct = await ProductModel.findByIdAndDelete({ _id: id });
+        console.log(id);
+        const deletedProduct = await ProductModel.findByIdAndDelete(id,{new:true});
         return res.json({
             deletedProduct,
             sucess: true
@@ -18,5 +19,4 @@ const deleteProdut = async (req: URequest, res: UResponse) :Promise<UResponse>=>
         })
     }
 }
-
 export default deleteProdut;

@@ -32,7 +32,6 @@ const updateProduct = async (req: URequest, res: UResponse): Promise<UResponse> 
                 error: error
             })
         }
-
     }
     catch (err) {
         return res.json({
@@ -41,5 +40,4 @@ const updateProduct = async (req: URequest, res: UResponse): Promise<UResponse> 
         })
     }
 }
-
 export default updateProduct;

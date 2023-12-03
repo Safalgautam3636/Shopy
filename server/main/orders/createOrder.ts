@@ -7,7 +7,8 @@ import { URequest, UResponse } from "../types";
 
 const createOrder = async (req: URequest, res: UResponse):Promise<UResponse> => {
     try {
-        const orderObject: Order = req.body as Order;
+        const orderObject: OrderDocument = req.body as OrderDocument;
+        orderObject.userId = req.user;
         let total = 0;
         const updateOrder= orderObject.items.map(async (item: OrderItem) => {
             try {

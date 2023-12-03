@@ -9,11 +9,10 @@ import { URequest, UResponse } from "../types";
 //get all orders of the user
 const getOrders = async(req: URequest, res: UResponse):Promise<UResponse>=> {
     try {
-        const user: UserDocument|null = await UserModel.findOne({ username: req.user });
-        const userOrders: OrderDocument[] = await OrderModel.find({ userId: user?._id });
+        const userOrders: OrderDocument[] = await OrderModel.find({ userId: req.user });
         return res.json({
             userOrders,
-            message:`All these are the orders for ${user?.username}!`
+            message:`All these are the orders for individual user!`
         })
     }
     catch (err) {
@@ -26,9 +25,8 @@ const getOrders = async(req: URequest, res: UResponse):Promise<UResponse>=> {
 const getSpecificOrderByUser = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
         const orderId = req.params.id;
-        const user: UserDocument | null = await UserModel.findOne({ username: req.user });
         const order: OrderDocument|null = await OrderModel.findOne({
-            userId: user?._id,
+            userId: req.user,
             _id: orderId
         });
         if (order) {

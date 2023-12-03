@@ -26,9 +26,9 @@ const OrderItemSchema = new Schema<orderItemDocument>({
     }
 })
 const OrderSchema = new Schema<OrderDocument>({
-    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: Schema.Types.ObjectId, ref: 'User'},
     orderDate: { type: Date, default: Date.now },
-    totalAmount: { type: Number, required: true },
+    totalAmount: { type: Number},
     items: {
         type: [OrderItemSchema],
         required: true

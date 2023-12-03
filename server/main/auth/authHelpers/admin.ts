@@ -6,7 +6,7 @@ import { URequest, UResponse } from "../../types";
 import UserModel, { UserDocument } from '../../models/schemas/User';
 
 interface DecodedUser  {
-    username: string,
+    _id: string,
     isAdmin: boolean
 };
 
@@ -23,9 +23,10 @@ const authenticateAdmin = async (req: URequest, res: UResponse, next: NextFuncti
             message: 'No token provided',
         })
     }
+    
     const decoded:Decoded = verifyToken(token) as Decoded;
     req.user = decoded.user;
-    const user: UserDocument | null = await UserModel.findOne({ username: req.user.username });
+    const user: UserDocument | null = await UserModel.findOne({ _id: req.user._id });
     if (!user?.isAdmin) {
         return res.json({
             message: "You have to be an admin for this operation!"

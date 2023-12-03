@@ -1,3 +1,4 @@
+
 import { ObjectId } from 'mongodb';
 
 // all functions written here are for the admin accessbility to users
@@ -11,14 +12,11 @@ import { ObjectId } from 'mongodb';
 import { UResponse, URequest } from "../types";
 import UserModel, { UserDocument } from '../models/schemas/User';
 import validateUserSchema from '../models/joi/user';
+import User from '../models/interfaces/User';
 
 const getUser = async(req: URequest, res: UResponse): Promise<UResponse> => {
     try {
-        let reqUser = req.user;
-        let user: UserDocument = await reqUser.findOne({ usenrmae: reqUser }) as UserDocument;
-        if (user.isAdmin) {
-            user = await UserModel.findOne({ _id: new ObjectId(req.params.id) }) as UserDocument;
-        }
+        const user = await UserModel.findOne({ _id: new ObjectId(req.params.id) });
         return res.json({
             user,
             message:"User profile fetched!"
@@ -54,21 +52,25 @@ const getUsers = async(req: URequest, res: UResponse): Promise<UResponse> => {
 const updateUser = async (req: URequest, res: UResponse): Promise<UResponse> => {
     try {
         const userId = new ObjectId(req.params.id);
-        const user: UserDocument[] | null = await UserModel.find({
-            _id:userId
-        });
-        const updateuser = { user, ...req.body };
+        const user: UserDocument | null = await UserModel.findOne({
+            _id: userId
+        }) as UserDocument;
 
-        const { error, value } = validateUserSchema.validate(updateuser);
+        const newUser = {
+            ...user?.toObject(),
+            ...req.body
+        };
+        delete newUser._id;
+        delete newUser.__v;
+        const { error, value } = validateUserSchema.validate(newUser);
         if (!error) {
-            const update = await UserModel.updateOne({ _id: userId }, { $set: updateUser }, { new: true });
+            const update = await UserModel.updateOne({ _id: userId }, { $set: value }, { new: true });
             return res.json({
                 update,
                 message: "Users updated!"
             })
             
         }
-            
         return res.json({
             message: "Couldnot find the users!"
         })
@@ -87,7 +89,6 @@ const deleteUser = async(req: URequest, res: UResponse): Promise<UResponse> => {
         if (user !== null) {
             await UserModel.deleteOne({ _id: userId },{new:true});
             return res.json({
-                
                 message: "User deleted!"
             })
         }
