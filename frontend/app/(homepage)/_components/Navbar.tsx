@@ -1,5 +1,4 @@
 "use client";
-
 import { useScrollTop } from "@/hooks/useScrollTop";
 import { cn } from "@/lib/utils";
 import { useConvexAuth } from "convex/react";
@@ -9,17 +8,29 @@ import { Spinner } from "@/components/Spinner";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ModeToggle";
 import Logo from "./Logo";
+import Search from "./Search";
 
 function Navbar() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const scrolled = useScrollTop();
 
   return (
-    <div className={cn("fixed top-0 z-50 flex w-full items-center bg-background p-6 dark:bg-[#1F1F1F]", scrolled && "border-b shadow-sm")}>
-      <Link href="/" passHref>
+    <div
+      className={cn(
+        "fixed top-0 z-50 flex w-full items-center justify-between bg-background p-6 dark:bg-[#1F1F1F]",
+        scrolled && "border-b shadow-sm",
+      )}
+    >
+      {/* Left Section: Logo */}
+      <Link href="/" className="flex items-center">
         <Logo />
       </Link>
-      <div className="flex w-full items-center justify-between gap-x-2 md:ml-auto md:justify-end">
+
+      {/* Middle Section: Search Bar */}
+      <Search />
+
+      {/* Right Section: Buttons and Mode Toggle */}
+      <div className="flex items-center gap-x-2">
         {isLoading && <Spinner />}
         {!isAuthenticated && !isLoading && (
           <>
