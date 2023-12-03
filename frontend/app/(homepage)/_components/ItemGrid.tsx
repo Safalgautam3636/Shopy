@@ -1,8 +1,8 @@
 "use client";
-import { Product } from "@/types/Product";
-import { getAllProducts } from "@/app/api/product/route";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { getAllProducts } from "@/app/api/product/route";
+import { Product } from "@/types/Product";
+import ProductItem from "./ProductItem";
 
 function ItemGrid() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -15,7 +15,6 @@ function ItemGrid() {
       try {
         const response = await getAllProducts();
         setProducts(response.data.allProducts);
-        console.log(response);
         setIsLoading(false);
       } catch (err) {
         setError(err);
@@ -28,25 +27,20 @@ function ItemGrid() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   if (error) {
-    console.log(error);
     return <div>Error: {error.message}</div>;
   }
 
-  if (products == undefined) {
-    return <div>Error: undefined products</div>;
+  if (!products || products.length === 0) {
+    return <div>Error: products not found</div>;
   }
+
   return (
-    <div>
-      <h2>Products</h2>
-      <div className="item-grid">
+    <div className="container mx-auto px-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
-          <div key={product._id} className="product-item">
-            <Image src={product.imgUrl} alt={product.name} layout="fill" />
-            <h3>{product.name}</h3>
-            <p>${product.price}</p>
-            {/* Other details */}
-          </div>
+          <ProductItem key={product._id} product={product} />
         ))}
       </div>
     </div>
