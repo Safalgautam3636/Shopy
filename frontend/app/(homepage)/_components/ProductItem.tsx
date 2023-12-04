@@ -9,7 +9,7 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   return (
     <Link href={`/${product._id}`} passHref>
-      <div className="max-w-sm overflow-hidden rounded shadow-lg">
+      <div className="max-w-sm overflow-hidden rounded shadow-lg dark:shadow-slate-700">
         <div className="relative h-48 w-full">
           <Image
             src={product.imgUrl}
@@ -21,7 +21,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
         </div>
         <div className="px-6 py-4">
           <div className="mb-2 truncate text-lg font-bold">{product.name}</div>
-          <p className="text-base text-gray-700">${product.price}</p>
+          <p className="text-base text-gray-700 dark:text-gray-300">${product.price}</p>
           {/* Other details */}
         </div>
       </div>

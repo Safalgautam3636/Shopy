@@ -45,12 +45,12 @@ export default function ProductPage() {
           <Image src={product.imgUrl} alt={product.name} width={500} height={500} />
         </div>
         <div className="w-1/2 pl-8">
-          <p className="mb-4 text-lg text-gray-700">{product.category}</p>
+          <p className="mb-4 text-lg">{product.category}</p>
           <h1 className="mb-4 text-3xl font-semibold">{product.name}</h1>
-          <p className="mb-4 text-lg text-gray-700">${product.price}</p>
-          <p className="mb-6 text-gray-600">In stock: {product.stockQuantity}</p>
+          <p className="mb-4 text-lg ">${product.price}</p>
+          <p className="mb-6">In stock: {product.stockQuantity}</p>
           <div className="mb-6 flex items-center">
-            <span className="mr-2 text-gray-700">Rating: {product.ratings}</span>
+            <span className="mr-2 ">Rating: {product.ratings}</span>
           </div>
           <button className="rounded bg-blue-500 px-4 py-2 text-white transition duration-300 hover:bg-blue-600">Add to Cart</button>
         </div>

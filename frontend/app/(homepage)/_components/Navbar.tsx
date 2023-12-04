@@ -6,9 +6,9 @@ import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/Spinner";
 import Link from "next/link";
-import { ModeToggle } from "@/components/ModeToggle";
 import Logo from "../../../components/Logo";
 import Search from "./Search";
+import { ModeToggle } from "@/components/ModeToggle";
 
 function Navbar() {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -46,13 +46,13 @@ function Navbar() {
         )}
         {isAuthenticated && !isLoading && (
           <>
-            <Button variant="ghost" size="sm">
-              <Link href="/dashboard">Dashboard</Link>
-            </Button>
+            <ModeToggle />
             <UserButton afterSignOutUrl="/" />
           </>
         )}
-        <ModeToggle />
+        <Button variant="ghost" size="sm">
+          <Link href="/cart">Cart</Link>
+        </Button>
       </div>
     </div>
   );
