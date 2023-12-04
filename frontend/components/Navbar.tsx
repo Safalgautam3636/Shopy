@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/Spinner";
 import Link from "next/link";
 import Logo from "./Logo";
-import Search from "../app/(homepage)/_components/Search";
+import Search from "./Search";
 import { ModeToggle } from "@/components/ModeToggle";
 
 function Navbar() {
