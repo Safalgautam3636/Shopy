@@ -20,7 +20,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
           />
         </div>
         <div className="px-6 py-4">
-          <div className="mb-2 text-xl font-bold">{product.name}</div>
+          <div className="mb-2 truncate text-lg font-bold">{product.name}</div>
           <p className="text-base text-gray-700">${product.price}</p>
           {/* Other details */}
         </div>
