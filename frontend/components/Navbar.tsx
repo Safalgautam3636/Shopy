@@ -6,8 +6,8 @@ import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/Spinner";
 import Link from "next/link";
-import Logo from "../../../components/Logo";
-import Search from "./Search";
+import Logo from "./Logo";
+import Search from "../app/(homepage)/_components/Search";
 import { ModeToggle } from "@/components/ModeToggle";
 
 function Navbar() {
@@ -31,6 +31,9 @@ function Navbar() {
 
       {/* Right Section: Buttons and Mode Toggle */}
       <div className="flex items-center gap-x-2">
+        <Button variant="ghost" size="sm">
+          <Link href="/cart">Cart</Link>
+        </Button>
         {isLoading && <Spinner />}
         {!isAuthenticated && !isLoading && (
           <>
@@ -46,13 +49,10 @@ function Navbar() {
         )}
         {isAuthenticated && !isLoading && (
           <>
-            <ModeToggle />
             <UserButton afterSignOutUrl="/" />
           </>
         )}
-        <Button variant="ghost" size="sm">
-          <Link href="/cart">Cart</Link>
-        </Button>
+        <ModeToggle />
       </div>
     </div>
   );
