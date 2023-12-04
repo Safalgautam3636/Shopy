@@ -35,7 +35,7 @@ export default function ProductPage() {
   }
 
   if (!product) {
-    return <div>Error: Product not found</div>;
+    return <div className="flex justify-center">Error: page not found</div>;
   }
 
   return (
