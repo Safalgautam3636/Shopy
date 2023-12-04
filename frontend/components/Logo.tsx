@@ -11,7 +11,7 @@ function Logo() {
   return (
     <div className="hidden items-center gap-x-2 md:flex">
       <Image src="/logo.svg" height="40" width="40" alt="logo" className="dark:invert" />
-      <p className={cn("font-semibold", font.className)}>Shopy</p>
+      <p className={cn("text-2xl font-semibold", font.className)}>Shopy</p>
     </div>
   );
 }
