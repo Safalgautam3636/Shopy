@@ -39,7 +39,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="container mt-24">
+    <div className="container">
       <div className="flex">
         <div className="mt-16 w-1/2">
           <Image src={product.imgUrl} alt={product.name} width={500} height={500} />

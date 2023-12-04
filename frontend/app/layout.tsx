@@ -18,8 +18,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <ConvexClientProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storageKey="shopy-theme">
-            <Navbar/>
-            {children}
+            <Navbar />
+            <div className="mt-24">{children}</div>
           </ThemeProvider>
         </ConvexClientProvider>
       </body>

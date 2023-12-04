@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getAllProducts } from "@/app/api/product/route";
 import { Product } from "@/types/Product";
 import ProductItem from "./ProductItem";
+import { Spinner } from "@/components/Spinner";
 
 function ItemGrid() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -27,7 +28,7 @@ function ItemGrid() {
   const cachedProductList = useMemo(() => products, [products]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (error) {
