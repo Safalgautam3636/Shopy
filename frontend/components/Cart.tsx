@@ -54,7 +54,7 @@ function Cart() {
           <>
             <div className="space--y1 flex h-full flex-col items-center justify-center">
               <div aria-hidden="true" className="relative mb-4 h-60 w-60 text-muted-foreground">
-                {theme === "dark" ? <div>Empty</div> : <Image src="/hippo-empty-cart.png" fill alt="empty shopping cart hippo" />}
+                {theme === "dark" ? "" : <Image src="/hippo-empty-cart.png" fill alt="empty shopping cart hippo" />}
               </div>
               <div className="text-xl font-semibold">Your cart is empty</div>
               <SheetTrigger asChild>
