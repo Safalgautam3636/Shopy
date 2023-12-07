@@ -8,6 +8,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 import Search from "./Search";
 import { ModeToggle } from "@/components/ModeToggle";
+import Cart from "./Cart";
 
 function Navbar() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -30,9 +31,11 @@ function Navbar() {
 
       {/* Right Section: Buttons and Mode Toggle */}
       <div className="flex items-center gap-x-2">
-        <Button variant="ghost" size="sm">
-          <Link href="/cart">Cart</Link>
-        </Button>
+        {/* <Button variant="ghost" size="sm"> */}
+        {/* <Link href="/cart"> */}
+        <Cart />
+        {/* </Link> */}
+        {/* </Button> */}
         {!isLoaded && <Spinner />}
         {!isSignedIn && isLoaded && (
           <>
