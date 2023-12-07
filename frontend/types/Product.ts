@@ -8,3 +8,11 @@ export interface Product {
   ratings: number;
   reviews: number;
 }
+
+export interface ProductResponse {
+  product: Product;
+}
+
+export interface ProductsResponse {
+  allProducts: Product[];
+}

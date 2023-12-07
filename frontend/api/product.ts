@@ -1,15 +1,7 @@
 import axios, { AxiosResponse } from "axios";
-import { Product } from "@/types/Product"; // Importing the Product interface
+import { Product, ProductResponse, ProductsResponse } from "@/types/Product";
 
 const BASE_URL = process.env.BACKEND_URL || "http://localhost:4500/api";
-
-interface ProductResponse {
-  product: Product;
-}
-
-interface ProductsResponse {
-  allProducts: Product[];
-}
 
 // Standard user functions
 export const getAllProducts = async (): Promise<AxiosResponse<ProductsResponse>> => {

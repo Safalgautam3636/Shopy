@@ -1,5 +1,5 @@
 "use client";
-import { getProductById } from "@/app/api/product/route";
+import { getProductById } from "@/api/product";
 import { Spinner } from "@/components/Spinner";
 import { formatPrice } from "@/lib/utils";
 import { Product } from "@/types/Product";

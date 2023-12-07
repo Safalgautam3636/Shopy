@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { getAllProducts } from "@/app/api/product/route";
+import { getAllProducts } from "@/api/product";
 import { Product } from "@/types/Product";
 import ProductItem from "./ProductCard";
 import { Spinner } from "@/components/Spinner";
