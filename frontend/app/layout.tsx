@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkClientProvider } from "@/components/providers/clerk-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "../components/Navbar";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
