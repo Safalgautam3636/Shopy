@@ -1,6 +1,7 @@
 "use client";
 import { getProductById } from "@/app/api/product/route";
 import { Spinner } from "@/components/Spinner";
+import { formatPrice } from "@/lib/utils";
 import { Product } from "@/types/Product";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -47,7 +48,7 @@ export default function ProductPage() {
         <div className="w-1/2 pl-8">
           <p className="mb-4 text-lg">{product.category}</p>
           <h1 className="mb-4 text-3xl font-semibold">{product.name}</h1>
-          <p className="mb-4 text-lg ">${product.price}</p>
+          <p className="mb-4 text-lg ">{formatPrice(product.price)}</p>
           <p className="mb-6">In stock: {product.stockQuantity}</p>
           <div className="mb-6 flex items-center">
             <span className="mr-2 ">Rating: {product.ratings}</span>

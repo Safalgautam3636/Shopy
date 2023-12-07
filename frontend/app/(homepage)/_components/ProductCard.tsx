@@ -3,6 +3,7 @@ import { Product } from "@/types/Product";
 import Link from "next/link";
 import { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { formatPrice } from "@/lib/utils";
 
 interface ProductItemProps {
   product: Product;
@@ -42,8 +43,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
         </div>
         <div className="px-6 py-4">
           <div className="mb-2 truncate text-lg font-bold dark:text-gray-300">{product.name}</div>
-          <p className="text-base text-gray-700 dark:text-gray-300">${product.price}</p>
-          {/* Other details */}
+          <p className="text-base text-gray-700 dark:text-gray-300">{formatPrice(product.price)}</p>
         </div>
       </Link>
       {!isAdded ? (
