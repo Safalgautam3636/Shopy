@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllProducts } from "@/app/api/product/route";
 import { Product } from "@/types/Product";
-import ProductItem from "./ProductItem";
+import ProductItem from "./ProductCard";
 import { Spinner } from "@/components/Spinner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
