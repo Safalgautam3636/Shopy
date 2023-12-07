@@ -53,9 +53,13 @@ function Cart() {
         ) : (
           <>
             <div className="space--y1 flex h-full flex-col items-center justify-center">
-              <div aria-hidden="true" className="relative mb-4 h-60 w-60 text-muted-foreground">
-                {theme === "dark" ? "" : <Image src="/hippo-empty-cart.png" fill alt="empty shopping cart hippo" />}
-              </div>
+              {theme === "dark" ? (
+                ""
+              ) : (
+                <div aria-hidden="true" className="relative mb-4 h-60 w-60 text-muted-foreground">
+                  <Image src="/hippo-empty-cart.png" fill alt="empty shopping cart hippo" />
+                </div>
+              )}
               <div className="text-xl font-semibold">Your cart is empty</div>
               <SheetTrigger asChild>
                 <Link href="/" className={buttonVariants({ variant: "link", size: "sm", className: "text-small text-muted-foreground" })}>
