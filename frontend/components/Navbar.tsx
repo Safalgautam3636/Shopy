@@ -31,11 +31,7 @@ function Navbar() {
 
       {/* Right Section: Buttons and Mode Toggle */}
       <div className="flex items-center gap-x-2">
-        {/* <Button variant="ghost" size="sm"> */}
-        {/* <Link href="/cart"> */}
         <Cart />
-        {/* </Link> */}
-        {/* </Button> */}
         {!isLoaded && <Spinner />}
         {!isSignedIn && isLoaded && (
           <>
