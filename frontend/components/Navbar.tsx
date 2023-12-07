@@ -1,8 +1,7 @@
 "use client";
 import { useScrollTop } from "@/hooks/useScrollTop";
 import { cn } from "@/lib/utils";
-import { useConvexAuth } from "convex/react";
-import { SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
+import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/Spinner";
 import Link from "next/link";
@@ -11,7 +10,7 @@ import Search from "./Search";
 import { ModeToggle } from "@/components/ModeToggle";
 
 function Navbar() {
-  const { isAuthenticated, isLoading } = useConvexAuth();
+  const { isSignedIn, isLoaded } = useAuth();
   const scrolled = useScrollTop();
 
   return (
@@ -34,8 +33,8 @@ function Navbar() {
         <Button variant="ghost" size="sm">
           <Link href="/cart">Cart</Link>
         </Button>
-        {isLoading && <Spinner />}
-        {!isAuthenticated && !isLoading && (
+        {!isLoaded && <Spinner />}
+        {!isSignedIn && isLoaded && (
           <>
             <SignInButton mode="modal">
               <Button variant="ghost" size="sm">
@@ -47,7 +46,7 @@ function Navbar() {
             </SignUpButton>
           </>
         )}
-        {isAuthenticated && !isLoading && (
+        {isSignedIn && isLoaded && (
           <>
             <UserButton afterSignOutUrl="/" />
           </>
