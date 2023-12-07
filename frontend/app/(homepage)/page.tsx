@@ -1,4 +1,4 @@
-import ItemGrid from "./_components/ProductGrid";
+import ItemGrid from "./ProductGrid";
 
 export default function Home() {
   return (
