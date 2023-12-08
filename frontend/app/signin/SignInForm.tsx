@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { Spinner } from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/api/user";
 
@@ -24,7 +23,6 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
     event.preventDefault();
     setIsLoading(true);
     try {
-      // const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`, { username, password });
       const response = await loginUser({ username, password });
       console.log(response);
       if (response.data.message === "User does not exist") {
