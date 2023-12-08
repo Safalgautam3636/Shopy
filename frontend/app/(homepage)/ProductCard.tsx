@@ -45,9 +45,7 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
         </Link>
         <div className="flex justify-between">
           <p className="mt-2 text-gray-900 dark:text-gray-100">{formatPrice(product.price)}</p>
-          <p className="mt-2 text-gray-900 dark:text-gray-100">
-            {product.stockQuantity === 0 ? "Out of Stock" : "In stock: " + product.stockQuantity}
-          </p>
+          <p className="mt-2 text-gray-900 dark:text-gray-100">{product.stockQuantity === 0 ? "Out of Stock" : "In Stock"}</p>
         </div>
       </div>
       <div className="mt-6 flex items-center justify-between">
