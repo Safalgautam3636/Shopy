@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { UserResponse } from "@/types/User";
-import { getOwnUserProfile } from "@/api/user";
+import { getOwnUserProfile, logoutUser } from "@/api/user";
 export interface AuthContextType {
   isAuthenticated: boolean;
   logout: () => void;
@@ -51,6 +51,7 @@ const useAuth = () => {
     setAuthToken(null);
     setUser(null);
     setIsAuthenticated(false);
+    logoutUser();
   };
 
   return { user, isAuthenticated, login, logout };
