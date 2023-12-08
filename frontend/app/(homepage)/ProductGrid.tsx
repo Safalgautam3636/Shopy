@@ -2,10 +2,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllProducts } from "@/api/product";
 import { Product } from "@/types/Product";
-import ProductItem from "./ProductCard";
 import { Spinner } from "@/components/Spinner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import ProductItem from "./ProductCard";
 
 function ItemGrid() {
   const [products, setProducts] = useState<Product[]>([]);

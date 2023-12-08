@@ -5,11 +5,11 @@ import { useState } from "react";
 import { formatPrice } from "@/lib/utils";
 import { Trash } from "lucide-react";
 
-interface ProductItemProps {
+interface ProductItemV2Props {
   product: Product;
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
+const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [quantity, setQuantity] = useState(0);
 
@@ -30,50 +30,22 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   }
 
   return (
-    <div className="max-w-sm overflow-hidden rounded shadow-lg dark:shadow-slate-700">
+    <div className="rounded-lg bg-white px-10 py-10 shadow-md dark:bg-gray-800 dark:shadow-lg">
       <Link href={`/${product._id}`} passHref>
-        <div className="relative h-48 w-full">
-          <Image
-            src={product.imgUrl}
-            alt={product.name}
-            fill={true}
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          />
-        </div>
-        <div className="px-6 py-4">
-          <div className="mb-2 truncate text-lg font-bold dark:text-gray-300">{product.name}</div>
-          <p className="text-base text-gray-700 dark:text-gray-300">{formatPrice(product.price)}</p>
-        </div>
+        <Image src={product.imgUrl} alt={product.name} className="h-48 rounded-md" width={500} height={500} />
       </Link>
-      {!isAdded ? (
-        <button
-          className="w-full rounded-b bg-blue-500 px-6 py-2 text-sm font-bold text-white hover:bg-blue-600 dark:bg-blue-900 dark:text-gray-300 dark:hover:bg-blue-950"
-          onClick={handleAddToCart}
-        >
-          Add to Cart
+      <div className="mt-4">
+        <Link href={`/${product._id}`} passHref>
+          <h1 className="truncate text-lg font-bold uppercase text-gray-900 dark:text-white">{product.name}</h1>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{product.name.slice(0, 40)}...</p>
+        </Link>
+        <p className="mt-2 text-gray-900 dark:text-gray-100">${product.price}</p>
+      </div>
+      <div className="mt-6 flex items-center justify-between">
+        <button className="rounded bg-gray-800 px-4 py-2 text-xs font-bold uppercase text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:bg-gray-500">
+          Add to cart
         </button>
-      ) : (
-        <div className="flex items-center justify-between rounded-b bg-blue-500 text-sm font-bold text-white dark:bg-blue-900">
-          <div className="flex flex-1 justify-start">
-            {quantity === 1 ? (
-              <button onClick={handleRemove} className="h-full px-4 py-1.5 hover:bg-blue-600 dark:bg-blue-900 dark:hover:bg-blue-950">
-                <Trash />
-              </button>
-            ) : (
-              <button onClick={handleDecrement} className="h-full px-6 py-2 hover:bg-blue-600 dark:bg-blue-900 dark:hover:bg-blue-950">
-                -
-              </button>
-            )}
-          </div>
-          <span className="flex-1 text-center">{quantity}</span>
-          <div className="flex flex-1 justify-end">
-            <button onClick={handleIncrement} className="h-full px-6 py-2 hover:bg-blue-600 dark:bg-blue-900 dark:hover:bg-blue-950">
-              +
-            </button>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
