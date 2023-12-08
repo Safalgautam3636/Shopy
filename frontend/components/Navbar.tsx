@@ -47,7 +47,9 @@ function Navbar() {
 
       {/* Right Section: Buttons and Mode Toggle */}
       <div className="flex items-center gap-x-2">
-        <Cart />
+        <Button variant="ghost" size="sm">
+          <Cart />
+        </Button>
         {loading && <Spinner />}
         {!isAuthenticated && !loading && (
           <>
