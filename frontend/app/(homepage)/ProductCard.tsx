@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { formatPrice } from "@/lib/utils";
 import { Trash } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProductItemV2Props {
   product: Product;
@@ -49,12 +50,10 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
           <h1 className="truncate text-lg font-bold uppercase text-gray-900 dark:text-white">{product.name}</h1>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{product.category}</p>
         </Link>
-        <p className="mt-2 text-gray-900 dark:text-gray-100">${product.price}</p>
+        <p className="mt-2 text-gray-900 dark:text-gray-100">{formatPrice(product.price)}</p>
       </div>
       <div className="mt-6 flex items-center justify-between">
-        <button className="rounded bg-gray-800 px-4 py-2 text-xs font-bold uppercase text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:bg-gray-500">
-          Add to cart
-        </button>
+        <Button className="rounded text-xs font-bold uppercase">Add to cart</Button>
       </div>
     </div>
   );
