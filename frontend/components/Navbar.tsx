@@ -7,9 +7,7 @@ import { Spinner } from "@/components/Spinner";
 import Link from "next/link";
 import Logo from "./Logo";
 import Search from "./Search";
-import { ModeToggle } from "@/components/ModeToggle";
 import Cart from "./Cart";
-import { CiSettings } from "react-icons/ci";
 import { Settings } from "lucide-react";
 
 function Navbar() {
