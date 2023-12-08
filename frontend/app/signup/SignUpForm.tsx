@@ -33,11 +33,13 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
         setError("Username already in use. Please choose another.");
       } else if (response.data.message === "Email already in use") {
         setError("Email already in use. Please choose another.");
+      } else {
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
     } finally {
-      router.push("/");
+      setIsLoading(false);
     }
   }
 

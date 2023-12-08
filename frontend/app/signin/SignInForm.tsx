@@ -29,11 +29,13 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
         setError("Could not find account with that username.");
       } else if (response.data.message === "Invalid password!") {
         setError("Incorrect password.");
+      } else {
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
     } finally {
-      router.push("/");
+      setIsLoading(false);
     }
   }
 
