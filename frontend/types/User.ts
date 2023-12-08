@@ -4,9 +4,8 @@ export interface User {
   password: string;
   email: string;
   address: string;
-  isAdmin: boolean;
+  isAdmin?: boolean;
 }
-
 export interface LoginCredentials {
   username: string;
   password: string;
