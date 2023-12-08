@@ -30,7 +30,7 @@ const login = async (req: URequest, res: UResponse): Promise<UResponse> => {
       }
     } else {
       return res.json({
-        message: "User does not exists",
+        message: "User does not exist",
       });
     }
   } catch (err) {

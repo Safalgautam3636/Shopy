@@ -6,3 +6,4 @@ const logout = (req: URequest, res: UResponse, next: NextFunction) => {
   const { username, password } = req.body.user;
 };
 export default logout;
+ 

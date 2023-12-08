@@ -18,9 +18,13 @@ const signup = async (req: URequest, res: UResponse): Promise<UResponse> => {
     const userEmail: UserDocument | null = await UserModel.findOne({
       email,
     });
-    if (userName !== null || userEmail !== null) {
+    if (userName !== null) {
       return res.json({
-        message: "User already exists",
+        message: "Username already in use",
+      });
+    } else if (userEmail !== null) {
+      return res.json({
+        message: "Email already in use",
       });
     } else {
       const userData = {
