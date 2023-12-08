@@ -7,11 +7,13 @@ import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { CartContext } from "./providers/cart-provider";
+import { useContext } from "react";
 
 function Cart() {
   // TODO: add dynamic values
   const { theme } = useTheme();
-  const itemCount = 0;
+  const { cartItems, getCartTotalPrice, getCartTotalQuantity, incrementCart, decrementCart, removeItem } = useContext(CartContext);
   const shippingFee = 0;
   const transactionFee = 1;
   return (
@@ -19,19 +21,63 @@ function Cart() {
       <SheetTrigger className="group flex items-center p-2">
         <ShoppingCartIcon aria-hidden="true" className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800 dark:text-gray-400 group-hover:dark:text-gray-500">
-          {itemCount}
+          {getCartTotalQuantity()}
         </span>
       </SheetTrigger>
       <SheetContent className="sm:mex-w-lg flex w-full flex-col pr-0">
         <SheetHeader className="space-y-2.5 pr-6">
-          <SheetTitle>Cart ({itemCount})</SheetTitle>
+          <SheetTitle>Cart ({getCartTotalQuantity()})</SheetTitle>
         </SheetHeader>
-        {itemCount > 0 ? (
+        {getCartTotalQuantity() > 0 ? (
           <>
-            <div className="flex w-full flex-col pr-6">{/*TODO: cart logic*/}Cart Items</div>
+            <div className="flex w-full flex-col pr-6">
+              {cartItems.map((cartItem) => (
+                <div key={cartItem.item._id} className="flex items-center space-x-4 py-2">
+                  <Link href={`/${cartItem.item._id}`}>
+                    <div className="flex-shrink-0">
+                      <Image src={cartItem.item.imgUrl} alt={cartItem.item.name} width={50} height={50} />
+                    </div>
+                  </Link>
+                  <Link href={`/${cartItem.item._id}`}>
+                    <div className="flex flex-1 flex-col">
+                      <span className="text-sm font-medium">{cartItem.item.name.slice(0, 50)}</span>
+                      <span className="text-sm">{formatPrice(cartItem.item.price)}</span>
+                    </div>
+                  </Link>
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm">Qty:</span>
+                      <button
+                        className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                        onClick={() => decrementCart(cartItem.item)}
+                      >
+                        -
+                      </button>
+                      <span className="text-sm">{cartItem.quantity}</span>
+                      <button
+                        className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                        onClick={() => incrementCart(cartItem.item)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                        onClick={() => removeItem(cartItem.item)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="space-y-4 pr-6">
               <Separator />
               <div className="space-y-1.5 pr-6">
+                <div className="flex">
+                  <span className="flex-1">Subtotal</span>
+                  <span>{formatPrice(getCartTotalPrice())}</span>
+                </div>
                 <div className="flex">
                   <span className="flex-1">Shipping</span>
                   <span>{shippingFee === 0 ? "Free" : formatPrice(shippingFee)}</span>

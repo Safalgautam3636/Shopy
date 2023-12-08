@@ -1,34 +1,17 @@
 import Image from "next/image";
 import { Product } from "@/types/Product";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext } from "react";
 import { formatPrice } from "@/lib/utils";
-import { Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CartContext } from "@/components/providers/cart-provider";
 
 interface ProductItemV2Props {
   product: Product;
 }
 
 const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
-  const [isAdded, setIsAdded] = useState(false);
-  const [quantity, setQuantity] = useState(0);
-
-  function handleAddToCart() {
-    console.log("Add to cart:", product._id);
-    setQuantity(1);
-    setIsAdded(true);
-  }
-  function handleIncrement() {
-    setQuantity((cur) => cur + 1);
-  }
-  function handleDecrement() {
-    setQuantity((cur) => (cur > 1 ? cur - 1 : 1));
-  }
-  function handleRemove() {
-    setQuantity(0);
-    setIsAdded(false);
-  }
+  const { incrementCart } = useContext(CartContext);
 
   return (
     <div className="rounded-lg bg-white px-10 py-10 shadow-md dark:bg-gray-800 dark:shadow-lg">
@@ -53,7 +36,9 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
         <p className="mt-2 text-gray-900 dark:text-gray-100">{formatPrice(product.price)}</p>
       </div>
       <div className="mt-6 flex items-center justify-between">
-        <Button className="rounded text-xs font-bold uppercase">Add to cart</Button>
+        <Button className="rounded text-xs font-bold uppercase" onClick={() => incrementCart(product)}>
+          Add to cart
+        </Button>
       </div>
     </div>
   );

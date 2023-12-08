@@ -1,17 +1,19 @@
 "use client";
 import { getProductById } from "@/api/product";
 import { Spinner } from "@/components/Spinner";
+import { CartContext } from "@/components/providers/cart-provider";
 import { formatPrice } from "@/lib/utils";
 import { Product } from "@/types/Product";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
   const productId = params.productId;
+  const { incrementCart } = useContext(CartContext);
 
   useEffect(() => {
     if (productId) {
@@ -53,7 +55,12 @@ export default function ProductPage() {
           <div className="mb-6 flex items-center">
             <span className="mr-2 ">Rating: {product.ratings}</span>
           </div>
-          <button className="rounded bg-blue-500 px-4 py-2 text-white transition duration-300 hover:bg-blue-600">Add to Cart</button>
+          <button
+            className="rounded bg-blue-500 px-4 py-2 text-white transition duration-300 hover:bg-blue-600"
+            onClick={() => incrementCart(product)}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
