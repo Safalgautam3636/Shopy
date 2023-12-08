@@ -10,7 +10,7 @@ function Search() {
       <input
         type="search"
         placeholder="Search..."
-        className="w-full rounded-md px-4 py-2 text-black focus:outline-none focus:ring focus:ring-opacity-50"
+        className="w-full rounded-md px-4 py-2 text-black focus:outline-none focus:ring focus:ring-opacity-50 dark:text-white"
       />
     </form>
   );
