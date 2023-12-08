@@ -14,7 +14,7 @@ export default function AuthenticationPage() {
   return (
     <>
       <Link href="/signup" className={cn(buttonVariants({ variant: "ghost" }), "absolute right-4 top-4 mt-20 md:right-8 md:top-8")}>
-        Signup
+        Sign Up
       </Link>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -25,7 +25,7 @@ export default function AuthenticationPage() {
           <SignInForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
             New to Shopy?{" "}
-            <Link href="/register" className="underline underline-offset-4 hover:text-primary">
+            <Link href="/signup" className="underline underline-offset-4 hover:text-primary">
               Create an account
             </Link>
           </p>

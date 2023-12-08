@@ -7,6 +7,7 @@ import { Spinner } from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -16,6 +17,8 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [password, setPassword] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
 
+  const router = useRouter();
+
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
@@ -23,12 +26,14 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`, { username, password });
       console.log(response);
       if (response.data.message === "User does not exist") {
-        setError("User does not exist");
+        setError("Could not find account with that username.");
+      } else if (response.data.message === "Invalid password!") {
+        setError("Incorrect password.");
       }
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false);
+      router.push("/");
     }
   }
 

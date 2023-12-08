@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function RegisterForm({ className, ...props }: UserAuthFormProps) {
+export function SignUpForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -29,6 +29,10 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
       console.log(response);
       if (response.data.message === "User does not exist") {
         setError("User does not exist");
+      } else if (response.data.message === "Username already in use") {
+        setError("Username already in use. Please choose another.");
+      } else if (response.data.message === "Email already in use") {
+        setError("Email already in use. Please choose another.");
       }
     } catch (error) {
       console.log(error);
@@ -99,6 +103,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
             )}
             Register
           </Button>
+          {error && <div className="text-red-500">{error}</div>}
         </div>
       </form>
     </div>
