@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Product } from "@/types/Product";
 import Link from "next/link";
 import { useState } from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { formatPrice } from "@/lib/utils";
 import { Trash } from "lucide-react";
 
