@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { loginUser } from "@/api/user";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -23,7 +24,8 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`, { username, password });
+      // const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`, { username, password });
+      const response = await loginUser({ username, password });
       console.log(response);
       if (response.data.message === "User does not exist") {
         setError("Could not find account with that username.");

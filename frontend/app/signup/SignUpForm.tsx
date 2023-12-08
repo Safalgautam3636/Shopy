@@ -5,8 +5,9 @@ import { Spinner } from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { signupUser } from "@/api/user";
+import { User } from "@/types/User";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -25,7 +26,13 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/signup`, { username, password, email, address });
+      const userData: User = {
+        username,
+        password,
+        email,
+        address,
+      };
+      const response = await signupUser(userData);
       console.log(response);
       if (response.data.message === "User does not exist") {
         setError("User does not exist");
