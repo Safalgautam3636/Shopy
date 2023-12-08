@@ -36,6 +36,7 @@ export interface ValidationError {
 export interface UserResponse {
   user?: User;
   message: string;
+  token: string;
   error?: ValidationError;
 }
 
