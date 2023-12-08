@@ -41,6 +41,9 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
       } else if (response.data.message === "Email already in use") {
         setError("Email already in use. Please choose another.");
       } else {
+        console.log(typeof response.data.token);
+        console.log(response.data.token);
+        localStorage.setItem("userToken", response.data.token);
         router.push("/");
       }
     } catch (error) {

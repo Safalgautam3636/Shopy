@@ -30,6 +30,9 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
       } else if (response.data.message === "Invalid password!") {
         setError("Incorrect password.");
       } else {
+        console.log(typeof response.data.token);
+        console.log(response.data.token);
+        localStorage.setItem("userToken", response.data.token);
         router.push("/");
       }
     } catch (error) {
