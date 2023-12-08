@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { formatPrice } from "@/lib/utils";
 import Link from "next/link";
 import { CartContext } from "@/components/providers/cart-provider";
+import Image from "next/image";
 
 function CartPage() {
   const { cartItems, incrementCart, decrementCart, removeItem, getCartTotalPrice } = useContext(CartContext);
@@ -24,8 +25,11 @@ function CartPage() {
       <div>
         {cartItems.map((cartItem) => (
           <div key={cartItem.item._id} className="flex items-center justify-between border-b border-gray-200 py-4">
-            <h3 className="text-lg font-medium">{cartItem.item.name}</h3>
-            <p className="text-md">{formatPrice(cartItem.item.price)}</p>
+            <Link href={`/${cartItem.item._id}`} className="flex">
+              <Image src={cartItem.item.imgUrl} alt={cartItem.item.name} height="100" width="100" />
+              <h3 className="ml-2 text-lg font-medium">{cartItem.item.name}</h3>
+            </Link>
+            <p className="text-md mr-2">{formatPrice(cartItem.item.price)}</p>
             <div className="flex items-center">
               <button
                 onClick={() => decrementCart(cartItem.item)}
@@ -41,7 +45,7 @@ function CartPage() {
                 +
               </button>
             </div>
-            <button onClick={() => removeItem(cartItem.item)} className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">
+            <button onClick={() => removeItem(cartItem.item)} className="ml-2 rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">
               Remove
             </button>
           </div>
