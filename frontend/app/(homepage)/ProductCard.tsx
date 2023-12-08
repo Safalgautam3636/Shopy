@@ -32,7 +32,17 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
   return (
     <div className="rounded-lg bg-white px-10 py-10 shadow-md dark:bg-gray-800 dark:shadow-lg">
       <Link href={`/${product._id}`} passHref>
-        <Image src={product.imgUrl} alt={product.name} className="h-48 rounded-md" width={500} height={500} />
+        <div className="relative flex h-48 w-96 justify-center">
+          <Image
+            src={product.imgUrl}
+            alt={product.name}
+            className="h-48 rounded-md"
+            fill
+            style={{
+              objectFit: "contain",
+            }}
+          />
+        </div>
       </Link>
       <div className="mt-4">
         <Link href={`/${product._id}`} passHref>
