@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { CartContext } from "./providers/cart-provider";
 import { useContext } from "react";
+import { ScrollArea } from "./ui/scroll-area";
 
 function Cart() {
   // TODO: add dynamic values
@@ -24,53 +25,57 @@ function Cart() {
           {getCartTotalQuantity()}
         </span>
       </SheetTrigger>
-      <SheetContent className="sm:mex-w-lg flex w-full flex-col pr-0">
+      <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
         <SheetHeader className="space-y-2.5 pr-6">
           <SheetTitle>Cart ({getCartTotalQuantity()})</SheetTitle>
         </SheetHeader>
         {getCartTotalQuantity() > 0 ? (
           <>
             <div className="flex w-full flex-col pr-6">
-              {cartItems.map((cartItem) => (
-                <div key={cartItem.item._id} className="flex items-center space-x-4 py-2">
-                  <Link href={`/${cartItem.item._id}`}>
-                    <div className="flex-shrink-0">
-                      <Image src={cartItem.item.imgUrl} alt={cartItem.item.name} width={50} height={50} />
-                    </div>
-                  </Link>
-                  <Link href={`/${cartItem.item._id}`}>
-                    <div className="flex flex-1 flex-col">
-                      <span className="text-sm font-medium">{cartItem.item.name.slice(0, 50)}</span>
-                      <span className="text-sm">{formatPrice(cartItem.item.price)}</span>
-                    </div>
-                  </Link>
-                  <div className="flex items-center space-x-2">
+              {/* Cart Items */}
+              <ScrollArea className="flex-1 overflow-y-auto">
+                {cartItems.map((cartItem) => (
+                  <div key={cartItem.item._id} className="flex items-center space-x-4 py-2">
+                    <Link href={`/${cartItem.item._id}`}>
+                      <div className="flex-shrink-0">
+                        <Image src={cartItem.item.imgUrl} alt={cartItem.item.name} width={50} height={50} />
+                      </div>
+                    </Link>
+                    <Link href={`/${cartItem.item._id}`}>
+                      <div className="flex flex-1 flex-col">
+                        <span className="text-sm font-medium">{cartItem.item.name.slice(0, 50)}</span>
+                        <span className="text-sm">{formatPrice(cartItem.item.price)}</span>
+                      </div>
+                    </Link>
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm">Qty:</span>
-                      <button
-                        className="rounded border border-gray-300 p-1 text-xs text-gray-500"
-                        onClick={() => decrementCart(cartItem.item)}
-                      >
-                        -
-                      </button>
-                      <span className="text-sm">{cartItem.quantity}</span>
-                      <button
-                        className="rounded border border-gray-300 p-1 text-xs text-gray-500"
-                        onClick={() => incrementCart(cartItem.item)}
-                      >
-                        +
-                      </button>
-                      <button
-                        className="rounded border border-gray-300 p-1 text-xs text-gray-500"
-                        onClick={() => removeItem(cartItem.item)}
-                      >
-                        Remove
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm">Qty:</span>
+                        <button
+                          className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                          onClick={() => decrementCart(cartItem.item)}
+                        >
+                          -
+                        </button>
+                        <span className="text-sm">{cartItem.quantity}</span>
+                        <button
+                          className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                          onClick={() => incrementCart(cartItem.item)}
+                        >
+                          +
+                        </button>
+                        <button
+                          className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                          onClick={() => removeItem(cartItem.item)}
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </ScrollArea>
             </div>
+            {/* Pricing Details */}
             <div className="space-y-4 pr-6">
               <Separator />
               <div className="space-y-1.5 pr-6">
