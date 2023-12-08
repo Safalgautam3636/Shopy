@@ -7,7 +7,12 @@ function DashboardPage() {
   const { isAuthenticated, user } = useAuth();
 
   if (!isAuthenticated) {
-    return <div>Not logged in</div>;
+    return (
+      <div>
+        <div>Not logged in</div>
+        <ModeToggle />
+      </div>
+    );
   }
 
   return (
@@ -18,11 +23,11 @@ function DashboardPage() {
           <p>Email: {user.user?.email}</p>
           <p>Address: {user.user?.address}</p>
           <p>isAdmin: {user.user?.isAdmin ? "yes" : "no"}</p>
-          <ModeToggle />
         </div>
       ) : (
         <Spinner />
       )}
+      <ModeToggle />
     </div>
   );
 }
