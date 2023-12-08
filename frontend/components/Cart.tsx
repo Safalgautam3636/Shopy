@@ -33,7 +33,7 @@ function Cart() {
           <>
             <div className="flex w-full flex-col pr-6">
               {/* Cart Items */}
-              <ScrollArea className="flex-1 overflow-y-auto">
+              <ScrollArea className="h-[500px]">
                 {cartItems.map((cartItem) => (
                   <div key={cartItem.item._id} className="flex items-center space-x-4 py-2">
                     <Link href={`/${cartItem.item._id}`}>
