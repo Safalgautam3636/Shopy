@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signupUser } from "@/api/user";
 import { User } from "@/types/User";
+import useAuth from "@/hooks/useAuth";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -18,6 +19,7 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
   const [address, setAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const { login } = useAuth();
 
   const router = useRouter();
 
@@ -41,9 +43,10 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
       } else if (response.data.message === "Email already in use") {
         setError("Email already in use. Please choose another.");
       } else {
-        console.log(typeof response.data.token);
-        console.log(response.data.token);
-        localStorage.setItem("userToken", response.data.token);
+        // console.log(typeof response.data.token);
+        // console.log(response.data.token);
+        // localStorage.setItem("userToken", response.data.token);
+        login(response.data.token);
         router.push("/");
       }
     } catch (error) {

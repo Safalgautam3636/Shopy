@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/api/user";
+import useAuth from "@/hooks/useAuth";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -16,6 +17,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
+  const { login } = useAuth();
 
   const router = useRouter();
 
@@ -30,9 +32,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
       } else if (response.data.message === "Invalid password!") {
         setError("Incorrect password.");
       } else {
-        console.log(typeof response.data.token);
-        console.log(response.data.token);
-        localStorage.setItem("userToken", response.data.token);
+        login(response.data.token);
         router.push("/");
       }
     } catch (error) {
