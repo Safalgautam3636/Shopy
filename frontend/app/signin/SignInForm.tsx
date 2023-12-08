@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/api/user";
 import useAuth from "@/hooks/useAuth";
+import { useAuthContext } from "@/components/providers/auth-provider";
+import { useScrollTop } from "@/hooks/useScrollTop";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -17,9 +19,13 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
-  const { login } = useAuth();
-
   const router = useRouter();
+  const scrolled = useScrollTop();
+  const authContext = useAuthContext();
+  if (!authContext) {
+    return null;
+  }
+  const { login } = authContext;
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();

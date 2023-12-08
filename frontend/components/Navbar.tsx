@@ -1,19 +1,35 @@
 "use client";
 import { useScrollTop } from "@/hooks/useScrollTop";
 import { cn } from "@/lib/utils";
-import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/Spinner";
 import Link from "next/link";
 import Logo from "./Logo";
 import Search from "./Search";
 import Cart from "./Cart";
 import { Settings } from "lucide-react";
+import { useAuthContext } from "./providers/auth-provider";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Spinner } from "./Spinner";
 
 function Navbar() {
-  const { isSignedIn, isLoaded } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const authContext = useAuthContext();
   const scrolled = useScrollTop();
+  const router = useRouter();
+  if (!authContext) {
+    return null;
+  }
+  const { isAuthenticated, logout } = authContext;
 
+  function handleLogout() {
+    setLoading(true);
+    setTimeout(() => {
+      logout();
+      setLoading(false);
+      router.push("/");
+    }, 500);
+  }
   return (
     <div
       className={cn(
@@ -32,22 +48,24 @@ function Navbar() {
       {/* Right Section: Buttons and Mode Toggle */}
       <div className="flex items-center gap-x-2">
         <Cart />
-        {!isLoaded && <Spinner />}
-        {!isSignedIn && isLoaded && (
+        {loading && <Spinner />}
+        {!isAuthenticated && !loading && (
           <>
-            <SignInButton mode="modal">
+            <Link href="/signin">
               <Button variant="ghost" size="sm">
                 Log in
               </Button>
-            </SignInButton>
-            <SignUpButton mode="modal">
+            </Link>
+            <Link href="/signup">
               <Button size="sm">Sign up</Button>
-            </SignUpButton>
+            </Link>
           </>
         )}
-        {isSignedIn && isLoaded && (
+        {isAuthenticated && !loading && (
           <>
-            <UserButton afterSignOutUrl="/" />
+            <Button size="sm" onClick={handleLogout}>
+              Sign Out
+            </Button>
           </>
         )}
         <Link href="/dashboard">

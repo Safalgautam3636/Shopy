@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkClientProvider } from "@/components/providers/clerk-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "../components/Navbar";
+import { AuthProvider } from "@/components/providers/auth-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <ClerkClientProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storageKey="shopy-theme">
-            <Navbar />
-            <div className="mt-24">{children}</div>
+            <AuthProvider>
+              <Navbar />
+              <div className="mt-24">{children}</div>
+            </AuthProvider>
           </ThemeProvider>
         </ClerkClientProvider>
       </body>
