@@ -20,7 +20,7 @@ function Navbar() {
   if (!authContext) {
     return null;
   }
-  const { isAuthenticated, logout } = authContext;
+  const { isAuthenticated, logout, user } = authContext;
 
   function handleLogout() {
     setLoading(true);
@@ -47,9 +47,6 @@ function Navbar() {
 
       {/* Right Section: Buttons and Mode Toggle */}
       <div className="flex items-center gap-x-2">
-        <Button variant="ghost" size="sm">
-          <Cart />
-        </Button>
         {loading && <Spinner />}
         {!isAuthenticated && !loading && (
           <>
@@ -65,16 +62,24 @@ function Navbar() {
         )}
         {isAuthenticated && !loading && (
           <>
+            <Link href="/dashboard">
+              <Button variant="ghost">
+                <div className="text-base capitalize">Hello, {user?.user?.username}</div>
+              </Button>
+            </Link>
             <Button size="sm" onClick={handleLogout}>
               Sign Out
             </Button>
           </>
         )}
-        <Link href="/dashboard">
+        {/* <Link href="/dashboard">
           <Button variant="ghost" size="icon">
             <Settings className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 " />
           </Button>
-        </Link>
+        </Link> */}
+        <Button variant="ghost" size="sm">
+          <Cart />
+        </Button>
       </div>
     </div>
   );
