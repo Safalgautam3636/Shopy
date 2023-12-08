@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-// import Navbar from "../components/Navbar";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { CartProvider } from "@/components/providers/cart-provider";
 import dynamic from "next/dynamic";
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
   description: "Your destination for second hand goods",
 };
 
-const Nav = dynamic(() => import("../components/Navbar"), { ssr: false });
+const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -23,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storageKey="shopy-theme">
           <AuthProvider>
             <CartProvider>
-              <Nav />
+              <Navbar />
               <div className="mt-24">{children}</div>
             </CartProvider>
           </AuthProvider>
