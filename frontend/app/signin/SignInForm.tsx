@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/api/user";
-import useAuth from "@/hooks/useAuth";
 import { useAuthContext } from "@/components/providers/auth-provider";
 import { useScrollTop } from "@/hooks/useScrollTop";
 

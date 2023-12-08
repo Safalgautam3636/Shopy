@@ -13,6 +13,7 @@ export const loginUser = async (credentials: LoginCredentials): Promise<AxiosRes
 };
 
 export const logoutUser = async (): Promise<AxiosResponse> => {
+  // TODO: Pass credentials?
   return axios.get(`${BASE_URL}/user/logout`);
 };
 
