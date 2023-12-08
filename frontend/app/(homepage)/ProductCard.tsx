@@ -37,7 +37,7 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
       <div className="mt-4">
         <Link href={`/${product._id}`} passHref>
           <h1 className="truncate text-lg font-bold uppercase text-gray-900 dark:text-white">{product.name}</h1>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{product.name.slice(0, 40)}...</p>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{product.category}</p>
         </Link>
         <p className="mt-2 text-gray-900 dark:text-gray-100">${product.price}</p>
       </div>

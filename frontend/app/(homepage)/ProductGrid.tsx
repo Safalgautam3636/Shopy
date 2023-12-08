@@ -50,7 +50,11 @@ function ItemGrid() {
   }, [products, sort]);
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div className="flex items-center justify-center pt-44">
+        <Spinner size="lg" />
+      </div>
+    );
   }
 
   if (error) {
@@ -62,9 +66,9 @@ function ItemGrid() {
   }
 
   return (
-    <div className="container mx-auto px-4">
-      <div className="pb-5">
-        Sort By:{" "}
+    <div>
+      <div className="flex items-center justify-center pb-5">
+        <div className="pr-2">Sort By:</div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm">
@@ -81,7 +85,7 @@ function ItemGrid() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-4 px-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {sortedProducts.map((product) => (
           <ProductItem key={product._id} product={product} />
         ))}
