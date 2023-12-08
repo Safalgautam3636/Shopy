@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
 import { UserResponse } from "@/types/User";
 import { getOwnUserProfile, logoutUser } from "@/api/user";
 export interface AuthContextType {
