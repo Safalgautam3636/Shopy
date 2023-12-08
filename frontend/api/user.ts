@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { LoginCredentials, User, UserResponse, UsersResponse } from "@/types/User";
 
-const BASE_URL = process.env.BACKEND_URL || "http://localhost:4500/api";
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4500/api";
 
 // User authentication functions
 export const signupUser = async (userData: User): Promise<AxiosResponse<UserResponse>> => {

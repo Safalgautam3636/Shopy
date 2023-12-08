@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Product, ProductResponse, ProductsResponse } from "@/types/Product";
 
-const BASE_URL = process.env.BACKEND_URL || "http://localhost:4500/api";
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URLL || "http://localhost:4500/api";
 
 // Standard user functions
 export const getAllProducts = async (): Promise<AxiosResponse<ProductsResponse>> => {
