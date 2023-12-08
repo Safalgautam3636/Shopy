@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { formatPrice } from "@/lib/utils";
+import { Trash } from "lucide-react";
 
 interface ProductItemProps {
   product: Product;
@@ -57,8 +58,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
         <div className="flex items-center justify-between rounded-b bg-blue-500 text-sm font-bold text-white dark:bg-blue-900">
           <div className="flex flex-1 justify-start">
             {quantity === 1 ? (
-              <button onClick={handleRemove} className="h-full px-6 py-2.5 hover:bg-blue-600 dark:bg-blue-900 dark:hover:bg-blue-950">
-                <FaRegTrashAlt />
+              <button onClick={handleRemove} className="h-full px-4 py-1.5 hover:bg-blue-600 dark:bg-blue-900 dark:hover:bg-blue-950">
+                <Trash />
               </button>
             ) : (
               <button onClick={handleDecrement} className="h-full px-6 py-2 hover:bg-blue-600 dark:bg-blue-900 dark:hover:bg-blue-950">
