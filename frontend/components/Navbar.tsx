@@ -9,6 +9,8 @@ import Logo from "./Logo";
 import Search from "./Search";
 import { ModeToggle } from "@/components/ModeToggle";
 import Cart from "./Cart";
+import { CiSettings } from "react-icons/ci";
+import { Settings } from "lucide-react";
 
 function Navbar() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -50,7 +52,11 @@ function Navbar() {
             <UserButton afterSignOutUrl="/" />
           </>
         )}
-        <ModeToggle />
+        <Link href="/dashboard">
+          <Button variant="outline" size="icon">
+            <Settings className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          </Button>
+        </Link>
       </div>
     </div>
   );
