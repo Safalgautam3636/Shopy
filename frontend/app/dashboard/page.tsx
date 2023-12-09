@@ -30,8 +30,8 @@ function DashboardPage() {
 
   const userInfo = user?.user ? (
     <div className="text-center">
-      <h1 className="mb-6 text-3xl font-bold">Welcome, {user.user.username}!</h1>
-      <div className="rounded-lg bg-gray-100 p-4 shadow-md">
+      <h1 className="mb-6 text-3xl font-bold dark:text-gray-200">Welcome, {user.user.username}!</h1>
+      <div className="rounded-lg bg-gray-100 p-4 shadow-md dark:bg-gray-200 dark:text-black">
         <p className="font-medium">
           <strong>Username:</strong> {user.user.username}
         </p>
