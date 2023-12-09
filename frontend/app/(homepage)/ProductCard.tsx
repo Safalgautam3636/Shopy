@@ -26,7 +26,7 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
   return (
     <div className="rounded-lg bg-white px-10 py-10 shadow-md dark:bg-gray-800 dark:shadow-lg">
       <Link href={`/${product._id}`} passHref>
-        <div className="relative flex h-48 w-96 justify-center">
+        <div className="relative h-48">
           <Image
             src={product.imgUrl}
             alt={product.name}
