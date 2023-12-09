@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from "@/components/ui/button";
 import ProductItem from "./ProductCard";
 
-function ItemGrid() {
+function ProductGrid() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<any>(null);
@@ -94,4 +94,4 @@ function ItemGrid() {
   );
 }
 
-export default ItemGrid;
+export default ProductGrid;

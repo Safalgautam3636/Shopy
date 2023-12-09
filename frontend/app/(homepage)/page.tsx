@@ -1,5 +1,5 @@
-import ItemGrid from "./ProductGrid";
+import ProductGrid from "./ProductGrid";
 
 export default function Home() {
-  return <ItemGrid />;
+  return <ProductGrid />;
 }
