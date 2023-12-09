@@ -11,3 +11,11 @@ export interface OrderItem {
   unitPrice: number;
   subtotal: number;
 }
+
+export interface OrderResponse {
+  order: Order;
+}
+
+export interface OrdersResponse {
+  allOrders: Order[];
+}
