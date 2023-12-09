@@ -3,5 +3,4 @@ node_modules
 dist
 workflow.ts
 .DS_Store
-products_data.json
 output_first_500.csv
