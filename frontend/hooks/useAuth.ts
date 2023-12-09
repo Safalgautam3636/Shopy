@@ -6,6 +6,7 @@ export interface AuthContextType {
   logout: () => void;
   login: (token: string) => void;
   user: UserResponse | null;
+  authToken: string | null;
 }
 
 const useAuth = () => {
@@ -21,6 +22,7 @@ const useAuth = () => {
         setUser(response.data);
       } else {
         console.log("No token found");
+        logout();
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -53,7 +55,7 @@ const useAuth = () => {
     logoutUser();
   };
 
-  return { user, isAuthenticated, login, logout };
+  return { user, isAuthenticated, login, logout, authToken };
 };
 
 export default useAuth;

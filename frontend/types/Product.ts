@@ -13,6 +13,8 @@ export interface Product {
 
 export interface ProductResponse {
   product: Product;
+  message: string;
+  valid?: boolean;
 }
 
 export interface ProductsResponse {

@@ -5,8 +5,8 @@ import { ReactNode, createContext, useContext } from "react";
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { isAuthenticated, logout, login, user } = useAuth();
-  const value = { isAuthenticated, logout, login, user };
+  const { isAuthenticated, logout, login, user, authToken } = useAuth();
+  const value = { isAuthenticated, logout, login, user, authToken };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

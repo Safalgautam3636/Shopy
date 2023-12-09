@@ -1,7 +1,9 @@
 "use client";
 import { getProductById } from "@/api/product";
 import { Spinner } from "@/components/Spinner";
+import { useAuthContext } from "@/components/providers/auth-provider";
 import { CartContext } from "@/components/providers/cart-provider";
+import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 import { Product } from "@/types/Product";
 import Image from "next/image";
@@ -14,6 +16,7 @@ export default function ProductPage() {
   const params = useParams();
   const productId = params.productId;
   const { incrementCart } = useContext(CartContext);
+  const authContext = useAuthContext();
 
   useEffect(() => {
     if (productId) {
@@ -28,6 +31,11 @@ export default function ProductPage() {
         });
     }
   }, [productId]);
+
+  if (!authContext) {
+    return null;
+  }
+  const { user } = authContext;
 
   if (isLoading) {
     return (
@@ -61,6 +69,7 @@ export default function ProductPage() {
           >
             Add to Cart
           </button>
+          {user?.user?.isAdmin ? <Button className="ml-2 bg-red-500">(ADMIN) Delete</Button> : ""}
         </div>
       </div>
     </div>

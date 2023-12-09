@@ -4,11 +4,11 @@ import { cn } from "@/lib/utils";
 import { Spinner } from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signupUser } from "@/api/user";
 import { User } from "@/types/User";
-import useAuth from "@/hooks/useAuth";
+import { useAuthContext } from "@/components/providers/auth-provider";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -19,9 +19,13 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
   const [address, setAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const { login } = useAuth();
 
   const router = useRouter();
+  const authContext = useAuthContext();
+  if (!authContext) {
+    return null;
+  }
+  const { login, user } = authContext;
 
   async function onSubmit(event: React.SyntheticEvent) {
     console.log("Submitting");
@@ -36,7 +40,10 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
       };
       const response = await signupUser(userData);
       console.log(response);
-      if (response.data.message === "User does not exist") {
+      console.log(response.data.error?.details[0].message);
+      if (response.data.error?.details[0].message === '"username" length must be at least 5 characters long') {
+        setError("Username too short");
+      } else if (response.data.message === "User does not exist") {
         setError("User does not exist");
       } else if (response.data.message === "Username already in use") {
         setError("Username already in use. Please choose another.");

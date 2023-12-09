@@ -14,7 +14,7 @@ const authenticateUser = (
   res: UResponse,
   next: NextFunction
 ) => {
-  console.log("Token received: " + req.header("authorization"));
+  // TODO: Update authorization header
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
     return res.json({
@@ -22,6 +22,7 @@ const authenticateUser = (
     });
   } else {
     try {
+      console.log("Verified User");
       const decoded: Decoded = verifyToken(token) as Decoded;
       const user: UserResponse = decoded.user;
       req.user = user._id;

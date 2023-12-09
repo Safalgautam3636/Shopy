@@ -70,6 +70,15 @@ function Navbar() {
             <Button size="sm" onClick={handleLogout}>
               Sign Out
             </Button>
+            {user?.user?.isAdmin ? (
+              <Link href="/product/new">
+                <Button variant="outline" size="sm">
+                  +
+                </Button>
+              </Link>
+            ) : (
+              ""
+            )}
           </>
         )}
         {/* <Link href="/dashboard">
@@ -77,6 +86,7 @@ function Navbar() {
             <Settings className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 " />
           </Button>
         </Link> */}
+
         <Button variant="ghost" size="sm">
           <Cart />
         </Button>
