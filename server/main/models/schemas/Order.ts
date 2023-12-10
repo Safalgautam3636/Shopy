@@ -38,6 +38,10 @@ const OrderSchema = new Schema<OrderDocument>({
         default: 'Pending',
         required: true,
     },
+    isPaid: {
+        type: Boolean,
+        default:false
+    }
 })
 
 const OrderModel = mongoose.model<OrderDocument>('Order', OrderSchema);
