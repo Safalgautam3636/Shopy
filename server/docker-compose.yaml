@@ -6,6 +6,9 @@ services:
       dockerfile: DockerFile
     ports:
       - ${PORT}:${PORT}
+    image: safal19/shopy_server:v1
+    #docker tag safal19/shopy_server:v1 safal19/shopy_server:v1
+    # docker push safal19/shopy_server:v1
     environment:
       NODE_ENV: development
       MONGODB_URI: MONGODB_URI
