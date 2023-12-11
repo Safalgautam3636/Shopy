@@ -1,0 +1,11 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: DockerFile
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      NODE_ENV: development
+      MONGODB_URI: MONGODB_URI
