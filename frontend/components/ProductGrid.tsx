@@ -30,7 +30,9 @@ function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
   }, []);
 
   // Fuzzy search
-  const fuse = new Fuse(products, { keys: ["name"], includeScore: true, threshold: 0.3 });
+  const fuse = useMemo(() => {
+    return new Fuse(products, { keys: ["name"], includeScore: true, threshold: 0.3 });
+  }, [products]);
 
   const filteredAndSortedProducts = useMemo(() => {
     const filtered = filterQuery ? fuse.search(filterQuery).map((result) => result.item) : products;
