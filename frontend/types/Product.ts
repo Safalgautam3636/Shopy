@@ -9,11 +9,28 @@ export interface Product {
   ratings: number;
   reviews: number;
 }
+export interface ValidationErrorDetail {
+  message: string;
+  path: string[];
+  type: string;
+  context: {
+    limit?: number;
+    value?: any;
+    label?: string;
+    key?: string;
+  };
+}
+
+export interface ValidationError {
+  _original: any;
+  details: ValidationErrorDetail[];
+}
 
 export interface ProductResponse {
-  product: Product;
+  product?: Product;
   message: string;
   valid?: boolean;
+  error?: ValidationError; // Add this line to include the error structure
 }
 
 export interface ProductsResponse {
