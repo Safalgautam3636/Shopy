@@ -14,16 +14,13 @@ const authenticateUser = (
   res: UResponse,
   next: NextFunction
 ) => {
-  // TODO: Update authorization header
   const token = req.headers.authorization?.split(" ")[1];
-  console.log(token)
   if (!token) {
     return res.json({
       message: "No token provided",
     });
   } else {
     try {
-      console.log("Verified User");
       const decoded: Decoded = verifyToken(token) as Decoded;
       const user: UserResponse = decoded.user;
       req.user = user._id;
