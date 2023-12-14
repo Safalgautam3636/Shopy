@@ -10,13 +10,14 @@ import { resolve } from "path";
 import React, { useState } from "react";
 
 function NewProductPage() {
-  const [imgUrl, setImgIrl] = useState("https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg");
+  const [imgUrl, setImgUrl] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [category, setCategory] = useState("");
   const [ratings, setRatings] = useState(0);
   const [reviews, setReviews] = useState(0);
+
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -37,6 +38,16 @@ function NewProductPage() {
   const handleFocus = (e: any) => e.target.select();
 
   const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  function loadExample() {
+    setImgUrl("https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg");
+    setName("Example Product");
+    setPrice(5);
+    setQuantity(500);
+    setCategory("Example Category");
+    setRatings(5);
+    setReviews(50000);
+  }
 
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -70,7 +81,7 @@ function NewProductPage() {
       console.log(response);
       if (response.message === "Sucess") {
         setError("Added");
-        await sleep(2000);
+        await sleep(1000);
         sleep(1);
         router.push("/");
       } else if (response.error?.details[0].message) {
@@ -94,6 +105,11 @@ function NewProductPage() {
     <div className="mt-10 flex justify-center">
       <div className="w-full max-w-md space-y-4 rounded-lg bg-white p-8 shadow-lg">
         <h2 className="text-center text-2xl font-bold">Add Product</h2>
+        <div className="flex justify-center">
+          <Button onClick={loadExample} disabled={isSubmitting}>
+            Load Example
+          </Button>
+        </div>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <label className="flex flex-col">
             Name
@@ -114,7 +130,7 @@ function NewProductPage() {
               type="text"
               placeholder="Image URL"
               value={imgUrl}
-              onChange={(e) => setImgIrl(e.target.value)}
+              onChange={(e) => setImgUrl(e.target.value)}
               onFocus={handleFocus}
               required
               className="mt-1"
