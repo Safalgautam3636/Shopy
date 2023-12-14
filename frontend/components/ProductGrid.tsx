@@ -52,7 +52,7 @@ function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
         break;
     }
     return sorted;
-  }, [products, sort, filterQuery]);
+  }, [products, sort, filterQuery, fuse]);
 
   if (isLoading) {
     return (
