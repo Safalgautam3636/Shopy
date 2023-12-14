@@ -6,7 +6,6 @@ import Link from "next/link";
 import Logo from "./Logo";
 import Search from "./Search";
 import Cart from "./Cart";
-import { Settings } from "lucide-react";
 import { useAuthContext } from "./providers/auth-provider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

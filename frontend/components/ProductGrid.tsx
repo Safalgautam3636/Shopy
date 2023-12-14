@@ -6,8 +6,9 @@ import { Spinner } from "@/components/Spinner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import ProductItem from "./ProductCard";
+import Fuse from "fuse.js";
 
-function ProductGrid() {
+function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<any>(null);
@@ -28,8 +29,12 @@ function ProductGrid() {
     fetchProducts();
   }, []);
 
-  const sortedProducts = useMemo(() => {
-    let sorted = [...products];
+  // Fuzzy search
+  const fuse = new Fuse(products, { keys: ["name"], includeScore: true, threshold: 0.3 });
+
+  const filteredAndSortedProducts = useMemo(() => {
+    const filtered = filterQuery ? fuse.search(filterQuery).map((result) => result.item) : products;
+    let sorted = [...filtered];
     switch (sort) {
       case "Highest to Lowest":
         sorted.sort((a, b) => b.price - a.price);
@@ -47,7 +52,7 @@ function ProductGrid() {
         break;
     }
     return sorted;
-  }, [products, sort]);
+  }, [products, sort, filterQuery]);
 
   if (isLoading) {
     return (
@@ -61,7 +66,7 @@ function ProductGrid() {
     return <div>Error: {error.message}</div>;
   }
 
-  if (!sortedProducts || sortedProducts.length === 0) {
+  if (!filteredAndSortedProducts || filteredAndSortedProducts.length === 0) {
     return <div>Error: products not found</div>;
   }
 
@@ -86,7 +91,7 @@ function ProductGrid() {
         </DropdownMenu>
       </div>
       <div className="grid gap-4 px-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {sortedProducts.map((product) => (
+        {filteredAndSortedProducts.map((product) => (
           <ProductItem key={product._id} product={product} />
         ))}
       </div>
