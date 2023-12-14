@@ -10,7 +10,7 @@ function Search() {
   const router = useRouter();
   const initialSearchQuery = params.query ? decodeURIComponent(params.query as string) : "";
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
-  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+  const debouncedSearchQuery = useDebounce(searchQuery, 250);
 
   useEffect(() => {
     // Prevent repeat requests when the user is typing
