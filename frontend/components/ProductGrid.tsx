@@ -69,7 +69,11 @@ function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
   }
 
   if (!filteredAndSortedProducts || filteredAndSortedProducts.length === 0) {
-    return <div>Error: products not found</div>;
+    return (
+      <div className="flex items-center justify-center pt-44">
+        <div className="mx-auto max-w-md rounded-md border border-red-400 bg-red-100 p-4 text-red-700">Error: products not found</div>
+      </div>
+    );
   }
 
   return (

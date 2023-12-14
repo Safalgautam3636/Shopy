@@ -25,7 +25,7 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
 
   return (
     <div className="rounded-lg bg-white px-10 py-10 shadow-md dark:bg-gray-800 dark:shadow-lg">
-      <Link href={`/${product._id}`} passHref>
+      <Link href={`/product/${product._id}`} passHref>
         <div className="relative h-48">
           <Image
             src={product.imgUrl}
@@ -39,7 +39,7 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
         </div>
       </Link>
       <div className="mt-4">
-        <Link href={`/${product._id}`} passHref>
+        <Link href={`/product/${product._id}`} passHref>
           <h1 className="truncate text-lg font-bold uppercase text-gray-900 dark:text-white">{product.name}</h1>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{product.category}</p>
         </Link>
