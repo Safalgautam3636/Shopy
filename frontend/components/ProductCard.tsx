@@ -6,14 +6,23 @@ import { useContext, useState } from "react";
 import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CartContext } from "@/components/providers/cart-provider";
+import { useAuthContext } from "@/components/providers/auth-provider";
+import { useRouter } from "next/navigation";
+import { deleteProduct } from "@/api/product";
 
 interface ProductItemV2Props {
   product: Product;
 }
 
 const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
+  const router = useRouter();
   const { incrementCart } = useContext(CartContext);
   const [isAdded, setIsAdded] = useState(false);
+  const authContext = useAuthContext();
+  if (!authContext) {
+    return null;
+  }
+  const { authToken, isAuthenticated, user } = authContext;
 
   const handleAddToCart = () => {
     incrementCart(product);
@@ -22,7 +31,18 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
       setIsAdded(false);
     }, 1000);
   };
-
+  async function handleDelete() {
+    if (!product || !authToken || !product._id) {
+      console.log("Product details or auth token is missing");
+      return;
+    }
+    try {
+      await deleteProduct(product._id, authToken);
+      router.push("/#");
+    } catch (err) {
+      console.log("Error deleting product:", err);
+    }
+  }
   return (
     <div className="rounded-lg bg-white px-10 py-10 shadow-md dark:bg-gray-800 dark:shadow-lg">
       <Link href={`/product/${product._id}`} passHref>
@@ -53,6 +73,13 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
           <span className={`${isAdded ? "hidden" : "px-1"}`}>add to cart</span>
           <span className={`${!isAdded ? "hidden" : "px-6"}`}>added</span>
         </Button>
+        {user?.user?.isAdmin ? (
+          <Button className="ml-2 bg-red-500" onClick={handleDelete}>
+            (ADMIN) Delete
+          </Button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
