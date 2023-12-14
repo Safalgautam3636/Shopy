@@ -26,7 +26,6 @@ function Navbar() {
     setTimeout(() => {
       logout();
       setLoading(false);
-      router.push("/");
     }, 500);
   }
   return (
