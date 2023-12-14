@@ -1,5 +1,5 @@
 "use client";
-import { getProductById } from "@/api/product";
+import { deleteProduct, getProductById } from "@/api/product";
 import { Spinner } from "@/components/Spinner";
 import { useAuthContext } from "@/components/providers/auth-provider";
 import { CartContext } from "@/components/providers/cart-provider";
@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 import { Product } from "@/types/Product";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 export default function ProductPage() {
@@ -17,6 +17,7 @@ export default function ProductPage() {
   const productId = params.productId;
   const { incrementCart } = useContext(CartContext);
   const authContext = useAuthContext();
+  const router = useRouter();
 
   useEffect(() => {
     if (productId) {
@@ -35,8 +36,24 @@ export default function ProductPage() {
   if (!authContext) {
     return null;
   }
-  const { user } = authContext;
+  const { authToken, isAuthenticated, user } = authContext;
 
+  async function handleDelete() {
+    if (!product || !authToken || !product._id) {
+      console.log("Product details or auth token is missing");
+      return;
+    }
+    try {
+      await deleteProduct(product._id, authToken);
+      router.push("/");
+    } catch (err) {
+      console.log("Error deleting product:", err);
+    }
+  }
+
+  if (!authContext) {
+    return null;
+  }
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -69,7 +86,13 @@ export default function ProductPage() {
           >
             Add to Cart
           </button>
-          {user?.user?.isAdmin ? <Button className="ml-2 bg-red-500">(ADMIN) Delete</Button> : ""}
+          {user?.user?.isAdmin ? (
+            <Button className="ml-2 bg-red-500" onClick={handleDelete}>
+              (ADMIN) Delete
+            </Button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
