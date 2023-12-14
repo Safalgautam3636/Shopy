@@ -13,7 +13,8 @@ const validateOrderSchema = Joi.object<OrderDocument>({
     orderDate: Joi.date().default(new Date(Date.now())),
     totalAmount: Joi.number().required(),
     items: Joi.array().items(validateOrderItemSchema).required(),
-    orderStatus:Joi.string()
+    orderStatus: Joi.string(),
+    isPaid: Joi.boolean().default(false)
 })
 
 export default validateOrderSchema;

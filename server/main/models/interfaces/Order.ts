@@ -5,6 +5,7 @@ export interface Order{
     totalAmount: number,
     items: OrderItem[];
     orderStatus: string;
+    isPaid:boolean
 }
 export interface OrderItem{
     productId: mongoose.Schema.Types.ObjectId;

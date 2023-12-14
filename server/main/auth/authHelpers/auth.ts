@@ -16,6 +16,7 @@ const authenticateUser = (
 ) => {
   // TODO: Update authorization header
   const token = req.headers.authorization?.split(" ")[1];
+  console.log(token)
   if (!token) {
     return res.json({
       message: "No token provided",

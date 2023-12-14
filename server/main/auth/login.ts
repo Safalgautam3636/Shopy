@@ -22,7 +22,7 @@ const login = async (req: URequest, res: UResponse): Promise<UResponse> => {
         });
       } else {
         const token = generateToken({ _id: user._id, isAdmin: user.isAdmin });
-        res.setHeader("Auth", token);
+        //res.setHeader("Auth", token);
         return res.json({
           message: "User is valid",
           token: token,
