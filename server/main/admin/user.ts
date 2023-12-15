@@ -31,10 +31,10 @@ const getUser = async(req: URequest, res: UResponse): Promise<UResponse> => {
 }
 const getUsers = async(req: URequest, res: UResponse): Promise<UResponse> => {
     try {
-        const user: UserDocument[] | null = await UserModel.find();
-        if (user !== null) {
+        const users: UserDocument[] | null = await UserModel.find();
+        if (users !== null) {
             return res.json({
-                user,
+                users,
                 message: "Users fetched!"
             })
         }
