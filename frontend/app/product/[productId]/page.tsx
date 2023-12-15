@@ -76,19 +76,16 @@ export default function ProductPage() {
           <div className="mb-6 flex items-center">
             <span className="mr-2 ">Rating: {product.ratings}</span>
           </div>
-          <button
-            className="rounded bg-blue-500 px-4 py-2 text-white transition duration-300 hover:bg-blue-600"
-            onClick={() => incrementCart(product)}
-          >
+          <Button className="bg-black" onClick={() => incrementCart(product)}>
             Add to Cart
-          </button>
+          </Button>
           {user?.user?.isAdmin ? (
             <>
-              <Button className="ml-2 bg-green-500" onClick={handleUpdate}>
-                (ADMIN) Update
+              <Button className="ml-2 bg-blue-500 " onClick={handleUpdate}>
+                Update
               </Button>
-              <Button className="ml-2 bg-red-500" onClick={handleDelete}>
-                (ADMIN) Delete
+              <Button className="ml-2 bg-red-500 " onClick={handleDelete}>
+                Delete
               </Button>
             </>
           ) : (

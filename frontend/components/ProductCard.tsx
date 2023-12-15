@@ -9,6 +9,7 @@ import { CartContext } from "@/components/providers/cart-provider";
 import { useAuthContext } from "@/components/providers/auth-provider";
 import { useRouter } from "next/navigation";
 import { deleteProduct } from "@/api/product";
+import { Edit, Trash } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
@@ -39,8 +40,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       console.log("Error deleting product:", err);
     }
   }
+
+  function handleUpdate() {
+    router.push(`/product/${product._id}/edit`);
+  }
   return (
-    <div className="rounded-lg bg-white px-10 py-10 shadow-md dark:bg-gray-800 dark:shadow-lg">
+    <div className="rounded-lg bg-white px-4 py-4 shadow-md dark:bg-gray-800 dark:shadow-lg">
       <Link href={`/product/${product._id}`} passHref>
         <div className="relative h-48">
           <Image
@@ -64,15 +69,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <p className="mt-2 text-gray-900 dark:text-gray-100">{product.stockQuantity === 0 ? "Out of Stock" : "In Stock"}</p>
         </div>
       </div>
-      <div className="mt-6 flex items-center justify-between">
+      <div className="mt-4 flex flex-col items-center justify-between sm:flex-row">
         <Button className="rounded text-xs font-bold uppercase" onClick={handleAddToCart} disabled={isAdded}>
           <span className={`${isAdded ? "hidden" : "px-1"}`}>add to cart</span>
           <span className={`${!isAdded ? "hidden" : "px-6"}`}>added</span>
         </Button>
         {user?.user?.isAdmin ? (
-          <Button className="ml-2 bg-red-500" onClick={handleDelete}>
-            (ADMIN) Delete
-          </Button>
+          <div className="flex flex-wrap justify-center gap-2">
+            <Button className="bg-blue-500 text-xs" size="icon" onClick={handleUpdate}>
+              <Edit />
+            </Button>
+            <Button className="bg-red-500 text-xs" size="icon" onClick={handleDelete}>
+              <Trash />
+            </Button>
+          </div>
         ) : (
           ""
         )}
