@@ -51,20 +51,20 @@ function Cart() {
                       <div className="flex items-center space-x-2">
                         <span className="text-sm">Qty:</span>
                         <button
-                          className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                          className="rounded border border-gray-300 p-1 text-xs text-gray-500 dark:bg-white"
                           onClick={() => decrementCart(cartItem.item)}
                         >
                           -
                         </button>
                         <span className="text-sm">{cartItem.quantity}</span>
                         <button
-                          className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                          className="rounded border border-gray-300 p-1 text-xs text-gray-500 dark:bg-white"
                           onClick={() => incrementCart(cartItem.item)}
                         >
                           +
                         </button>
                         <button
-                          className="rounded border border-gray-300 p-1 text-xs text-gray-500"
+                          className="rounded border border-gray-300 p-1 text-xs text-gray-500 dark:bg-white"
                           onClick={() => removeItem(cartItem.item)}
                         >
                           Remove
