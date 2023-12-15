@@ -46,6 +46,10 @@ export default function ProductPage() {
     }
   }
 
+  const handleUpdate = () => {
+    router.push(`/product/${product?._id}/edit/`);
+  };
+
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -79,9 +83,14 @@ export default function ProductPage() {
             Add to Cart
           </button>
           {user?.user?.isAdmin ? (
-            <Button className="ml-2 bg-red-500" onClick={handleDelete}>
-              (ADMIN) Delete
-            </Button>
+            <>
+              <Button className="ml-2 bg-green-500" onClick={handleUpdate}>
+                (ADMIN) Update
+              </Button>
+              <Button className="ml-2 bg-red-500" onClick={handleDelete}>
+                (ADMIN) Delete
+              </Button>
+            </>
           ) : (
             ""
           )}
