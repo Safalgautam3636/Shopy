@@ -75,14 +75,7 @@ orderRoutes.put(
   updateOrderStatus
 );
 
-
-
-
 // Admin route
-
-
-
-
 
 /**
  * Get a list of all orders (admin access).

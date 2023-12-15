@@ -6,6 +6,4 @@ const paymentRouter: Router = Router();
 
 paymentRouter.post("/payment/", authenticateUser, payment);
 
-
-
 export default paymentRouter;
