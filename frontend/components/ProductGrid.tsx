@@ -5,7 +5,7 @@ import { Product } from "@/types/Product";
 import { Spinner } from "@/components/Spinner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import ProductItem from "./ProductCard";
+import ProductCard from "./ProductCard";
 import Fuse from "fuse.js";
 
 function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
@@ -98,7 +98,7 @@ function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
       </div>
       <div className="grid gap-4 px-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {filteredAndSortedProducts.map((product) => (
-          <ProductItem key={product._id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>

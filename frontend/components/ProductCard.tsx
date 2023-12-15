@@ -10,15 +10,15 @@ import { useAuthContext } from "@/components/providers/auth-provider";
 import { useRouter } from "next/navigation";
 import { deleteProduct } from "@/api/product";
 
-interface ProductItemV2Props {
+interface ProductCardProps {
   product: Product;
 }
 
-const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter();
   const { incrementCart } = useContext(CartContext);
   const [isAdded, setIsAdded] = useState(false);
-  const { authToken, isAuthenticated, user } = useAuthContext();
+  const { authToken, user } = useAuthContext();
 
   const handleAddToCart = () => {
     incrementCart(product);
@@ -81,4 +81,4 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
   );
 };
 
-export default ProductItem;
+export default ProductCard;
