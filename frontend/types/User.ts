@@ -38,6 +38,7 @@ export interface UserResponse {
   message: string;
   token: string;
   error?: ValidationError;
+  newUser?: User; // signupUser
 }
 
 export interface UsersResponse {

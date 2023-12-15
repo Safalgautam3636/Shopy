@@ -74,6 +74,7 @@ function UserInfoPage() {
         <p>Name: {user.username}</p>
         <p>Email: {user.email}</p>
         <p>Address: {user.address}</p>
+        <p>IsAdmin: {user.isAdmin ? "Yes" : "No"}</p>
       </div>
     </div>
   );
