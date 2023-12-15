@@ -7,6 +7,7 @@ export interface AuthContextType {
   login: (token: string) => void;
   user: UserResponse | null;
   authToken: string | null;
+  fetchUserData: () => void;
 }
 
 const useAuth = () => {
@@ -55,7 +56,7 @@ const useAuth = () => {
     logoutUser();
   };
 
-  return { user, isAuthenticated, login, logout, authToken };
+  return { user, isAuthenticated, login, logout, authToken, fetchUserData };
 };
 
 export default useAuth;
