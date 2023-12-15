@@ -48,11 +48,21 @@ function EditProductPage() {
   }, [productId]);
 
   if (!isAuthenticated) {
-    return <div>Login Required</div>;
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <h2 className="mb-4 text-2xl font-semibold">Access Denied</h2>
+        <p className="mb-4">You must be logged in to view this page.</p>
+      </div>
+    );
   }
 
   if (!user?.user?.isAdmin) {
-    return <div>Admin only</div>;
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <h2 className="mb-4 text-2xl font-semibold">Access Denied</h2>
+        <p className="mb-4">You must be an admin to view this page.</p>
+      </div>
+    );
   }
 
   const handleFocus = (e: any) => e.target.select();
@@ -88,7 +98,9 @@ function EditProductPage() {
       const response = await updateProduct(productId, productData, authToken).then((res) => res.data);
       console.log(response);
       if (response.status === true) {
-        router.push(`/product/${productId}`)
+        router.push(`/product/${productId}`);
+      } else if (response.message === "You have to be an admin for this operation!") {
+        setError("Error: must be admin to perform update");
       } else {
         setError("An unknown error occurred");
       }

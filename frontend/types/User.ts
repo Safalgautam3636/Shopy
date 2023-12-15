@@ -1,5 +1,5 @@
 export interface User {
-  _id?: string;
+  _id: string;
   username: string;
   password: string;
   email: string;
@@ -41,5 +41,5 @@ export interface UserResponse {
 }
 
 export interface UsersResponse {
-  allUsers: User[];
+  users: User[];
 }

@@ -24,7 +24,12 @@ function NewProductPage() {
   const { authToken, isAuthenticated, user } = useAuthContext();
 
   if (!isAuthenticated) {
-    return <div>Login Required</div>;
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <h2 className="mb-4 text-2xl font-semibold">Access Denied</h2>
+        <p className="mb-4">You must be logged in to view this page.</p>
+      </div>
+    );
   }
 
   if (!user?.user?.isAdmin) {

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Spinner } from "@/components/Spinner";
 import useAuth from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function DashboardPage() {
   const { isAuthenticated, user } = useAuth();
@@ -17,8 +19,8 @@ function DashboardPage() {
   if (!isAuthenticated) {
     return (
       <div className="flex flex-col items-center justify-center">
-        <h2 className="mb-4 text-2xl font-semibold">Access Denied</h2>
-        <p className="mb-4">You must be logged in to view this page.</p>
+        <h2 className="mb-4 text-2xl font-semibold">Welcome</h2>
+        <p className="mb-4">You must be logged in to view your data.</p>
         <ModeToggle />
       </div>
     );
@@ -44,6 +46,13 @@ function DashboardPage() {
         <p className="font-medium">
           <strong>Admin Status:</strong> {user.user.isAdmin ? "Yes" : "No"}
         </p>
+        {user.user.isAdmin && (
+          <p className="mt-10">
+            <Link href="/user">
+              <Button>User Management</Button>
+            </Link>
+          </p>
+        )}
       </div>
     </div>
   ) : (

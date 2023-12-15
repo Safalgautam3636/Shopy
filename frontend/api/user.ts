@@ -24,7 +24,7 @@ export const getOwnUserProfile = async (authToken: string): Promise<AxiosRespons
       Authorization: `Bearer ${authToken}`,
     },
   });
-};
+}; 
 
 export const updateOwnUserProfile = async (userData: User, authToken: string): Promise<AxiosResponse<UserResponse>> => {
   return axios.put<UserResponse>(`${BASE_URL}/user/update`, userData, {
@@ -35,52 +35,42 @@ export const updateOwnUserProfile = async (userData: User, authToken: string): P
 };
 
 // Admin functions for user management
-export const getAllUsers = async (authToken: string, adminAuthToken: string): Promise<AxiosResponse<UsersResponse>> => {
+export const getAllUsers = async (authToken: string): Promise<AxiosResponse<UsersResponse>> => {
   return axios.get<UsersResponse>(`${BASE_URL}/admin/users`, {
     headers: {
       Authorization: `Bearer ${authToken}`,
-      AdminAuthorization: `Bearer ${adminAuthToken}`,
     },
   });
 };
 
-export const getUserById = async (id: string, authToken: string, adminAuthToken: string): Promise<AxiosResponse<UserResponse>> => {
+export const getUserById = async (id: string, authToken: string): Promise<AxiosResponse<UserResponse>> => {
   return axios.get<UserResponse>(`${BASE_URL}/admin/user/${id}`, {
     headers: {
       Authorization: `Bearer ${authToken}`,
-      AdminAuthorization: `Bearer ${adminAuthToken}`,
     },
   });
 };
 
-export const deleteUser = async (id: string, authToken: string, adminAuthToken: string): Promise<AxiosResponse> => {
+export const deleteUser = async (id: string, authToken: string): Promise<AxiosResponse> => {
   return axios.delete(`${BASE_URL}/admin/user/delete/${id}`, {
     headers: {
       Authorization: `Bearer ${authToken}`,
-      AdminAuthorization: `Bearer ${adminAuthToken}`,
     },
   });
 };
 
-export const deleteAllUsers = async (authToken: string, adminAuthToken: string): Promise<AxiosResponse> => {
+export const deleteAllUsers = async (authToken: string): Promise<AxiosResponse> => {
   return axios.delete(`${BASE_URL}/admin/user/delete-all`, {
     headers: {
       Authorization: `Bearer ${authToken}`,
-      AdminAuthorization: `Bearer ${adminAuthToken}`,
     },
   });
 };
 
-export const updateUserById = async (
-  id: string,
-  userData: User,
-  authToken: string,
-  adminAuthToken: string,
-): Promise<AxiosResponse<UserResponse>> => {
+export const updateUserById = async (id: string, userData: User, authToken: string): Promise<AxiosResponse<UserResponse>> => {
   return axios.put<UserResponse>(`${BASE_URL}/admin/user/update/${id}`, userData, {
     headers: {
       Authorization: `Bearer ${authToken}`,
-      AdminAuthorization: `Bearer ${adminAuthToken}`,
     },
   });
 };

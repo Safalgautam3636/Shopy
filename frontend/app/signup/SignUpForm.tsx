@@ -29,6 +29,7 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
     try {
       const userData: User = {
+        _id: "",
         username,
         password,
         email,

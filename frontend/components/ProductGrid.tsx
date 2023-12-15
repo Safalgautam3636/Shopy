@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { getAllProducts } from "@/api/product";
-import { Product } from "@/types/Product";
+import { Product, ProductsResponse } from "@/types/Product";
 import { Spinner } from "@/components/Spinner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import ProductCard from "./ProductCard";
 import Fuse from "fuse.js";
+import { AxiosResponse } from "axios";
 
 function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
   const [products, setProducts] = useState<Product[]>([]);
@@ -15,16 +16,18 @@ function ProductGrid({ filterQuery = "" }: { filterQuery?: string }) {
   const [sort, setSort] = useState("No Sorting");
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchProducts = async () => {
-      setIsLoading(true);
-      try {
-        const response = await getAllProducts();
-        setProducts(response.data.allProducts);
-        setIsLoading(false);
-      } catch (err) {
-        setError(err);
-        setIsLoading(false);
-      }
+      await getAllProducts()
+        .then((response: AxiosResponse<ProductsResponse>) => {
+          setProducts(response.data.allProducts);
+        })
+        .catch((err) => {
+          setError(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     };
     fetchProducts();
   }, []);

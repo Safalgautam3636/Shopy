@@ -39,5 +39,6 @@ export interface ProductsResponse {
 
 export interface UpdateProductResponse {
   updatedProduct: Product;
-  status: boolean;
+  status?: boolean;
+  message?: string;
 }
