@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthContext } from "@/components/providers/auth-provider";
 import { AxiosResponse } from "axios";
 import { UsersResponse, User } from "@/types/User";
-import { getAllUsers } from "@/api/user";
+import { deleteUser, getAllUsers } from "@/api/user";
 import { Spinner } from "@/components/Spinner";
 import { useRouter } from "next/navigation";
 import { Edit, Trash } from "lucide-react";
@@ -63,9 +63,17 @@ export default function UsersPage() {
     router.push("/user/create");
   };
 
-  const handleDeleteUser = (userId: string) => {
-    // Implement delete logic, maybe with a confirmation dialog
-    console.log("Delete user with id: ", userId);
+  const handleDeleteUser = async (userId: string) => {
+    if (!confirm("Are you sure you want to delete this user?")) {
+      return;
+    }
+
+    try {
+      await deleteUser(userId, authToken || "");
+      setUsers(users.filter((user) => user._id !== userId));
+    } catch (err) {
+      console.error("Error deleting user:", err);
+    }
   };
 
   const handleEditUser = (userId: string) => {

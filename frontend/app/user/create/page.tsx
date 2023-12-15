@@ -1,18 +1,18 @@
-import { Metadata } from "next";
+"use client";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { CreateUserForm } from "./CreateUserForm";
-
-export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication form",
-};
+import { ArrowLeft } from "lucide-react";
 
 export default function AuthenticationPage() {
   return (
-    <>
+    <div className="container mx-auto mt-8">
+      <Link href="/user">
+        <Button className="text-xs" variant="outline">
+          <ArrowLeft /> All Users
+        </Button>
+      </Link>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
@@ -21,6 +21,6 @@ export default function AuthenticationPage() {
           <CreateUserForm />
         </div>
       </div>
-    </>
+    </div>
   );
 }

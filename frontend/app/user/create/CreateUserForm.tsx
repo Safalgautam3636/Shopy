@@ -72,7 +72,6 @@ export function CreateUserForm({ className, ...props }: UserAuthFormProps) {
               id="username"
               type="text"
               autoCapitalize="none"
-              autoComplete="username"
               autoCorrect="off"
               disabled={isLoading}
               value={username}
@@ -84,7 +83,7 @@ export function CreateUserForm({ className, ...props }: UserAuthFormProps) {
               id="email"
               type="email"
               autoCapitalize="none"
-              autoComplete="username"
+              autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
               value={email}
@@ -96,7 +95,7 @@ export function CreateUserForm({ className, ...props }: UserAuthFormProps) {
               id="address"
               type="text"
               autoCapitalize="none"
-              autoComplete="username"
+              autoComplete="address"
               autoCorrect="off"
               disabled={isLoading}
               value={address}
@@ -108,7 +107,6 @@ export function CreateUserForm({ className, ...props }: UserAuthFormProps) {
               id="password"
               type="password"
               autoCapitalize="none"
-              autoComplete="email"
               autoCorrect="off"
               disabled={isLoading}
               value={password}
