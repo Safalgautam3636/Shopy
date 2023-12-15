@@ -16,7 +16,7 @@ export default function ProductPage() {
   const params = useParams();
   const productId = params.productId;
   const { incrementCart } = useContext(CartContext);
-  const authContext = useAuthContext();
+  const { authToken, isAuthenticated, user } = useAuthContext();
   const router = useRouter();
 
   useEffect(() => {
@@ -33,11 +33,6 @@ export default function ProductPage() {
     }
   }, [productId]);
 
-  if (!authContext) {
-    return null;
-  }
-  const { authToken, isAuthenticated, user } = authContext;
-
   async function handleDelete() {
     if (!product || !authToken || !product._id) {
       console.log("Product details or auth token is missing");
@@ -51,9 +46,6 @@ export default function ProductPage() {
     }
   }
 
-  if (!authContext) {
-    return null;
-  }
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">

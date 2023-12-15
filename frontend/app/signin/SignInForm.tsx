@@ -20,11 +20,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [error, setError] = React.useState<string>("");
   const router = useRouter();
   const scrolled = useScrollTop();
-  const authContext = useAuthContext();
-  if (!authContext) {
-    return null;
-  }
-  const { login } = authContext;
+  const { login } = useAuthContext();
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();

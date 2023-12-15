@@ -2,7 +2,7 @@
 import useAuth, { AuthContextType } from "@/hooks/useAuth";
 import { ReactNode, createContext, useContext } from "react";
 
-const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, logout, login, user, authToken } = useAuth();

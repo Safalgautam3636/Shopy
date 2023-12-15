@@ -21,11 +21,7 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
-  const authContext = useAuthContext();
-  if (!authContext) {
-    return null;
-  }
-  const { login, user } = authContext;
+  const { login, user } = useAuthContext();
 
   async function onSubmit(event: React.SyntheticEvent) {
     console.log("Submitting");

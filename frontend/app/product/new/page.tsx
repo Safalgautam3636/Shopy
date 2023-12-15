@@ -21,11 +21,7 @@ function NewProductPage() {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const authContext = useAuthContext();
-  if (!authContext) {
-    return null;
-  }
-  const { authToken, isAuthenticated, user } = authContext;
+  const { authToken, isAuthenticated, user } = useAuthContext();
 
   if (!isAuthenticated) {
     return <div>Login Required</div>;

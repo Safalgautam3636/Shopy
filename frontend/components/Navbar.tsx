@@ -13,13 +13,9 @@ import { Spinner } from "./Spinner";
 
 function Navbar() {
   const [loading, setLoading] = useState(false);
-  const authContext = useAuthContext();
+  const { isAuthenticated, logout, user } = useAuthContext();
   const scrolled = useScrollTop();
   const router = useRouter();
-  if (!authContext) {
-    return null;
-  }
-  const { isAuthenticated, logout, user } = authContext;
 
   function handleLogout() {
     setLoading(true);

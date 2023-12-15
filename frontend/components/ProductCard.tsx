@@ -18,11 +18,7 @@ const ProductItem: React.FC<ProductItemV2Props> = ({ product }) => {
   const router = useRouter();
   const { incrementCart } = useContext(CartContext);
   const [isAdded, setIsAdded] = useState(false);
-  const authContext = useAuthContext();
-  if (!authContext) {
-    return null;
-  }
-  const { authToken, isAuthenticated, user } = authContext;
+  const { authToken, isAuthenticated, user } = useAuthContext();
 
   const handleAddToCart = () => {
     incrementCart(product);
