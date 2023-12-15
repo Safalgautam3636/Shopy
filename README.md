@@ -1,3 +1,3 @@
 # Shopy
 
-Dataset: https://discord.com/channels/@me/1170416943967256698/1185359050246987897
+Dataset: https://www.kaggle.com/datasets/asaniczka/amazon-canada-products-2023-2-1m-products/
