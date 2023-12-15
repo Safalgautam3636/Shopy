@@ -18,6 +18,23 @@ const createProduct = async (req: URequest, res: UResponse) => {
     const reviews: number = source.reviews;
     const ratings: number = source.ratings;
     const imgUrl: string = source.imgUrl;
+
+    const productExists = await ProductModel.findOne({
+      name,
+      category,
+      imgUrl,
+    });
+
+    if (productExists) {
+      productExists.stockQuantity += stockQuantity;
+      await productExists.save();
+      return res.json({
+        productExists,
+        message: "Sucess",
+        valid: true,
+      });
+    }
+
     const productObject: Product = {
       name,
       description,
@@ -29,7 +46,7 @@ const createProduct = async (req: URequest, res: UResponse) => {
       ratings,
       imgUrl,
     };
-    console.log(productObject);
+
     const { error, value } = validateProductSchema.validate(productObject);
     if (!error) {
       const product = new ProductModel(value);
