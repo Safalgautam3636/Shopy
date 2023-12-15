@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Product, ProductResponse, ProductsResponse } from "@/types/Product";
+import { Product, ProductResponse, ProductsResponse, UpdateProductResponse } from "@/types/Product";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4500/api";
 
@@ -21,8 +21,8 @@ export const createProduct = async (productData: Product, authToken: string): Pr
   });
 };
 
-export const updateProduct = async (id: string, productData: Product, authToken: string): Promise<AxiosResponse<ProductResponse>> => {
-  return axios.put<ProductResponse>(`${BASE_URL}/admin/product/update-product/${id}`, productData, {
+export const updateProduct = async (id: string, productData: Product, authToken: string): Promise<AxiosResponse<UpdateProductResponse>> => {
+  return axios.put<UpdateProductResponse>(`${BASE_URL}/admin/product/update-product/${id}`, productData, {
     headers: {
       Authorization: `Bearer ${authToken}`,
     },

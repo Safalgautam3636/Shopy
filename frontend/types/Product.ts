@@ -36,3 +36,8 @@ export interface ProductResponse {
 export interface ProductsResponse {
   allProducts: Product[];
 }
+
+export interface UpdateProductResponse {
+  updatedProduct: Product;
+  status: boolean;
+}
